@@ -1,0 +1,22 @@
+<ion-grid class="stroke-input">
+
+  <ion-row>
+
+    <ion-col width-50>{{label}}</ion-col>
+    <ion-col width-10>{{total}}</ion-col>
+
+    <ion-col width-20>
+      <ion-buttons end>
+        <button secondary (click)="decrease()" type="button">-</button>
+      </ion-buttons>
+    </ion-col>
+
+    <ion-col width-20>
+      <ion-buttons end>
+        <button secondary (click)="increase()" type="button">+</button>
+      </ion-buttons>
+    </ion-col>
+
+  </ion-row>
+
+</ion-grid>
