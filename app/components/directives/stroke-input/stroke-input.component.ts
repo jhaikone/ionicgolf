@@ -11,9 +11,8 @@ import { OnInit } from '@angular/core'
 export class StrokeInputComponent implements OnInit {
 
   @Input() label: String;
-  @Input() total: number;
+  @Input() total: any;
 
-  @Input() ngModel: number;
   @Output() totalChange = new EventEmitter();
 
   ngOnInit() {
@@ -22,13 +21,13 @@ export class StrokeInputComponent implements OnInit {
 
   increase() {
     console.log('incease')
-    this.total++;
+    this.total.value++;
     this.totalChange.emit(this.total);
   }
 
   decrease() {
-    if(this.total > 1) {
-        this.total--;
+    if(this.total.value > 1) {
+        this.total.value--;
         this.totalChange.emit(this.total);
     }
 
