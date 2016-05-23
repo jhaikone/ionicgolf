@@ -1,23 +1,35 @@
-import {Page} from 'ionic-angular';
+import {Page, Slides} from 'ionic-angular';
 import { StrokeInputComponent } from '../../components/directives/stroke-input/stroke-input.component';
-
+import { HoleService } from '../../components/services/hole-service/hole-service.component';
 
 @Page({
   templateUrl: 'build/pages/hole-view/hole-view.html',
-  directives: [StrokeInputComponent]
+  directives: [StrokeInputComponent],
+  providers: [HoleService]
 })
 export class HoleViewPage {
 
-  strokes: any;
-  putts: any;
-  sands: any;
-  penalties: any;
+  slider:any;
+  options:any;
+  currentIndex:any;
+  availableHoles:any;
+  model: any;
+  currentPlayer: any;
+  holeService: HoleService;
 
-  constructor() {
-    this.strokes = {key: 'strokes', value: 3};
-    this.putts =  {key: 'putts', value: 2};
-    this.sands =  {key: 'sands', value: 0};
-    this.penalties = {key: 'penalties', value: 0};
+  constructor(holeService: HoleService) {
+
+    this.holeService = holeService;
+    this.currentIndex = 0;
+    this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
+    this.updateModel();
+
+    this.options = {
+      onlyExternal: false,
+      autoplay: false,
+      onInit: (slides: any) => this.slider = slides
+    }
+
   }
 
   /* onChange is triggered if any of the inputs' values are changed
@@ -33,9 +45,9 @@ export class HoleViewPage {
 
   /* increase strokes if the rest are greater*/
   increasePrimaryTotal($event) {
-    let total: number = this.putts.value + this.sands.value + this.penalties.value;
-    if(total >= this.strokes.value) {
-      this.strokes.value = total;
+    let total: number = this.currentPlayer.putts.value + this.currentPlayer.sands.value + this.currentPlayer.penalties.value;
+    if(total >= this.currentPlayer.strokes.value) {
+      this.currentPlayer.strokes.value = total;
     }
   }
 
@@ -44,15 +56,15 @@ export class HoleViewPage {
 
     this._initSecondaryValue($event);
 
-    let total:number = this.putts.value + this.sands.value + this.penalties.value;
+    let total:number = this.currentPlayer.putts.value + this.currentPlayer.sands.value + this.currentPlayer.penalties.value;
 
-    if (this.strokes.value < total) {
-      if (this.penalties.value > 0) {
-        this.penalties.value = this.penalties.value -1;
-      } else if (this.sands.value > 0) {
-        this.sands.value = this.sands.value -1;
+    if (this.currentPlayer.strokes.value < total) {
+      if (this.currentPlayer.penalties.value > 0) {
+        this.currentPlayer.penalties.value = this.currentPlayer.penalties.value -1;
+      } else if (this.currentPlayer.sands.value > 0) {
+        this.currentPlayer.sands.value = this.currentPlayer.sands.value -1;
       } else {
-        this.putts.value = this.putts.value -1;
+        this.currentPlayer.putts.value = this.currentPlayer.putts.value -1;
       }
     }
 
@@ -61,18 +73,28 @@ export class HoleViewPage {
   _initSecondaryValue($event) {
     switch ($event.key) {
       case 'putts': {
-        this.putts.value = $event.value;
+        this.currentPlayer.putts.value = $event.value;
         break;
       }
       case 'sands': {
-        this.sands.value = $event.value;
+        this.currentPlayer.sands.value = $event.value;
         break;
       }
       case 'penalties': {
-        this.penalties.value = $event.value;
+        this.currentPlayer.penalties.value = $event.value;
         break;
       }
     }
+  }
+
+  private updateModel() {
+    this.model = this.holeService.getModel();
+    this.currentPlayer = this.model.players[0];
+  }
+
+  onSlideChanged() {
+    this.holeService.setIndex(this.slider.activeIndex);
+    this.updateModel();
   }
 
 }

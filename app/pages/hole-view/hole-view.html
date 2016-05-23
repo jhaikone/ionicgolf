@@ -1,8 +1,15 @@
-<ion-content padding>
+<ion-content>
+   <ion-slides (didChange)="onSlideChanged()" slider="slider" [options]="options">
 
-  <stroke-input label="Lyönnit" (totalChange)="onChange($event)" [(total)]="strokes"> </stroke-input>
-  <stroke-input label="Putit" (totalChange)="onChange($event)" [(total)]="putts"> </stroke-input>
-  <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [(total)]="sands"> </stroke-input>
-  <stroke-input label="Rangaistukset" (totalChange)="onChange($event)" [(total)]="penalties"> </stroke-input>
+     <ion-slide  *ngFor="let hole of availableHoles; let i = index">
+       {{currentPlayer.strokes.value}}
+       <stroke-input label="Lyönnit" (totalChange)="onChange($event)" [(total)]="currentPlayer.strokes"> </stroke-input>
+       <stroke-input label="Putit" (totalChange)="onChange($event)" [(total)]="currentPlayer.putts"> </stroke-input>
+       <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [(total)]="currentPlayer.sands"> </stroke-input>
+       <stroke-input label="Rangaistukset" (totalChange)="onChange($event)" [(total)]="currentPlayer.penalties"> </stroke-input>
+     </ion-slide>
+
+   </ion-slides>
+
 
 </ion-content>

@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { OnInit } from '@angular/core'
-/**
- * This class represents the toolbar component.
- */
+import { OnInit } from '@angular/core';
+
 @Component({
   selector: 'stroke-input',
   templateUrl: 'build/components/directives/stroke-input/stroke-input.component.html'
