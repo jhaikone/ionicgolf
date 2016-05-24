@@ -10,6 +10,7 @@ export class StrokeInputComponent implements OnInit {
 
   @Input() label: String;
   @Input() total: any;
+  @Input() primary:boolean;
 
   @Output() totalChange = new EventEmitter();
 
@@ -24,7 +25,7 @@ export class StrokeInputComponent implements OnInit {
   }
 
   decrease() {
-    if(this.total.value > 1) {
+    if(this.total.value > 0) {
         this.total.value--;
         this.totalChange.emit(this.total);
     }

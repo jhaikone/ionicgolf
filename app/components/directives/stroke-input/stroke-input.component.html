@@ -1,18 +1,13 @@
-<ion-grid class="stroke-input">
+<ion-grid>
 
-  <ion-row>
+  <ion-row class="stroke-input">
 
-    <ion-col width-50>{{label}}</ion-col>
-    <ion-col width-10>{{total.value}}</ion-col>
+    <ion-col width-40>{{label}}</ion-col>
+    <ion-col end width-20 class="text-right" [ngClass]="{'primary': primary, 'secondary': !primary}">{{total.value}}</ion-col>
 
-    <ion-col width-20>
+    <ion-col width-40>
       <ion-buttons end>
         <button secondary (click)="decrease()" type="button">-</button>
-      </ion-buttons>
-    </ion-col>
-
-    <ion-col width-20>
-      <ion-buttons end>
         <button secondary (click)="increase()" type="button">+</button>
       </ion-buttons>
     </ion-col>
