@@ -16,6 +16,9 @@ export class HoleViewPage {
   model: any;
   currentPlayer: any;
   holeService: HoleService;
+  results: any;
+  playerIndex: any;
+  holes: any;
 
   constructor(holeService: HoleService) {
 
@@ -23,10 +26,13 @@ export class HoleViewPage {
     this.currentIndex = 0;
     this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
     this.updateModel();
+    this.results = this.holeService.getResults();
+    this.playerIndex = 0
+    this.holes = this.holeService.getHoles();
+    console.log('holes', this.holes);
 
     this.options = {
-      onlyExternal: false,
-      autoplay: false,
+      speed: 150,
       onInit: (slides: any) => this.slider = slides
     }
 
@@ -92,8 +98,25 @@ export class HoleViewPage {
     this.currentPlayer = this.model.players[0];
   }
 
-  onSlideChanged() {
+  private initCurrentIndex() {
     this.holeService.setIndex(this.slider.activeIndex);
+    this.currentIndex = this.holeService.getIndex();
+  }
+
+  next() {
+    this.slider.slideNext();
+    this.initCurrentIndex();
+    this.updateModel();
+  }
+
+  previous() {
+    this.slider.slidePrev();
+    this.initCurrentIndex();
+    this.updateModel();
+  }
+
+  onSlideChanged() {
+    this.initCurrentIndex();
     this.updateModel();
   }
 

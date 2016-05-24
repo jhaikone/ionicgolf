@@ -1,3 +1,39 @@
 .content {
-  
+
+  .top {
+    align-items: inherit;
+  }
+
+  .swiper-slide {
+    overflow-y: auto;
+  }
+}
+
+.item {
+  padding: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.menu-bar {
+  color: color($colors, primary);
+  font-size: color($fonts, avarage);
+}
+
+.toolbar-background {
+  background: color($colors, dark);
+}
+
+scroll-content {
+  overflow-y: hidden;
+}
+
+ion-slide {
+  width: 100%;
+}
+
+.no-background {
+  background: none;
 }
