@@ -32,8 +32,8 @@
 
 <ion-toolbar class="menu-bar" position="bottom">
   <ion-row class="stroke-input">
-    <ion-col width-33><button (click)="previous()" clear> <i> < </i> </button> </ion-col>
-    <ion-col width-33></ion-col>
-    <ion-col width-33 class="text-right"><button (click)="next()" clear><i>></i></button></ion-col>
+    <ion-col col-33><button *ngIf="!isFirstHole" clear (click)="previous()"> <i> < </i> </button> </ion-col>
+    <ion-col col-33><button *ngIf="isLastHole">Lopeta kierros</button></ion-col>
+    <ion-col col-33 class="text-right"><button *ngIf="!isLastHole" clear (click)="next()" ><i>></i></button></ion-col>
   </ion-row>
 </ion-toolbar>

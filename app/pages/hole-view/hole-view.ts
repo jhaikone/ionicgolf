@@ -9,27 +9,32 @@ import { HoleService } from '../../components/services/hole-service/hole-service
 })
 export class HoleViewPage {
 
+  holeService: HoleService;
+
+  currentIndex:number = 0;
+  playerIndex: number = 0;
+  isLastHole: boolean = false;
+  isFirstHole: boolean = true;
+
   slider:any;
   options:any;
-  currentIndex:any;
   availableHoles:any;
   model: any;
   currentPlayer: any;
-  holeService: HoleService;
   results: any;
-  playerIndex: any;
   holes: any;
+
 
   constructor(holeService: HoleService) {
 
     this.holeService = holeService;
-    this.currentIndex = 0;
+
     this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
+
     this.updateModel();
+
     this.results = this.holeService.getResults();
-    this.playerIndex = 0
     this.holes = this.holeService.getHoles();
-    console.log('holes', this.holes);
 
     this.options = {
       speed: 150,
@@ -41,11 +46,11 @@ export class HoleViewPage {
   /* onChange is triggered if any of the inputs' values are changed
   ** Primary total is strokes. Secondary total is all the rest
   */
-  onChange($event) {
-    if($event.key === 'strokes') {
-      this._decreaseSecondaryTotal($event);
+  onChange(event) {
+    if(event.key === 'strokes') {
+      this._decreaseSecondaryTotal(event);
     } else {
-      this.increasePrimaryTotal($event)
+      this.increasePrimaryTotal(event)
     }
   }
 
@@ -58,9 +63,9 @@ export class HoleViewPage {
   }
 
   /* decrease rest if strokes is greater */
-  _decreaseSecondaryTotal($event) {
+  _decreaseSecondaryTotal(event) {
 
-    this._initSecondaryValue($event);
+    this._initSecondaryValue(event);
 
     let total:number = this.currentPlayer.putts.value + this.currentPlayer.sands.value + this.currentPlayer.penalties.value;
 
@@ -76,18 +81,18 @@ export class HoleViewPage {
 
   }
 
-  _initSecondaryValue($event) {
-    switch ($event.key) {
+  _initSecondaryValue(event) {
+    switch (event.key) {
       case 'putts': {
-        this.currentPlayer.putts.value = $event.value;
+        this.currentPlayer.putts.value = event.value;
         break;
       }
       case 'sands': {
-        this.currentPlayer.sands.value = $event.value;
+        this.currentPlayer.sands.value = event.value;
         break;
       }
       case 'penalties': {
-        this.currentPlayer.penalties.value = $event.value;
+        this.currentPlayer.penalties.value = event.value;
         break;
       }
     }
@@ -104,20 +109,26 @@ export class HoleViewPage {
   }
 
   next() {
+    this.isFirstHole = false;
     this.slider.slideNext();
+    this.isLastHole = this.slider.isEnd;
     this.initCurrentIndex();
     this.updateModel();
   }
 
   previous() {
+    this.isLastHole = false;
     this.slider.slidePrev();
     this.initCurrentIndex();
     this.updateModel();
+    this.isFirstHole = this.slider.isBeginning;
   }
 
   onSlideChanged() {
     this.initCurrentIndex();
     this.updateModel();
+    this.isLastHole = this.slider.isEnd;
+    this.isFirstHole = this.slider.isBeginning;
   }
 
 }

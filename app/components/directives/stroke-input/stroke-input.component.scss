@@ -3,12 +3,10 @@
   display: flex;
   align-items: center;
 
-  button {
+  .small-button {
     width: 52px;
     height: 52px;
   }
-
-
 
   .primary {
     color: color($colors, primary);
