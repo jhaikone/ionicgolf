@@ -7,6 +7,7 @@ import { HoleService } from '../../components/services/hole-service/hole-service
   directives: [StrokeInputComponent],
   providers: [HoleService]
 })
+
 export class HoleViewPage {
 
   holeService: HoleService;
@@ -56,8 +57,8 @@ export class HoleViewPage {
 
   /* increase strokes if the rest are greater*/
   increasePrimaryTotal($event) {
-    let total: number = this.currentPlayer.putts.value + this.currentPlayer.sands.value + this.currentPlayer.penalties.value;
-    if(total >= this.currentPlayer.strokes.value) {
+    let total: number = this.currentPlayer.putts.value + this.currentPlayer.sands.value + this.currentPlayer.penalties.value + this.currentPlayer.drive.value;
+    if(total > this.currentPlayer.strokes.value) {
       this.currentPlayer.strokes.value = total;
     }
   }
@@ -67,7 +68,7 @@ export class HoleViewPage {
 
     this._initSecondaryValue(event);
 
-    let total:number = this.currentPlayer.putts.value + this.currentPlayer.sands.value + this.currentPlayer.penalties.value;
+    let total:number = this.currentPlayer.putts.value + this.currentPlayer.sands.value + this.currentPlayer.penalties.value + this.currentPlayer.drive.value;
 
     if (this.currentPlayer.strokes.value < total) {
       if (this.currentPlayer.penalties.value > 0) {

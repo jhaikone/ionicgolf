@@ -8,24 +8,32 @@ import { OnInit } from '@angular/core';
 
 export class StrokeInputComponent implements OnInit {
 
+  showInput: boolean = false;
+
   @Input() label: String;
   @Input() total: any;
   @Input() primary:boolean;
 
-  @Output() totalChange = new EventEmitter();
+  @Output() totalChange = new EventEmitter(false);
 
   ngOnInit() {
     //initing
   }
 
   increase() {
-    console.log('incease')
-    this.total.value++;
+    let isPrimary = this.total.key === 'strokes' || this.total.key === 'putts' ? true : false;
+
+    if(this.showInput || !isPrimary) {
+      this.total.value++;
+    }
+    this.showInput = true;
     this.totalChange.emit(this.total);
+
   }
 
   decrease() {
-    if(this.total.value > 0) {
+    let minimumValue:number = this.total.key === 'strokes' ? 1 : 0;
+    if(this.total.value > minimumValue ) {
         this.total.value--;
         this.totalChange.emit(this.total);
     }

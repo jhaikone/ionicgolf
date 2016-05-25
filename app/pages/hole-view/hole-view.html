@@ -17,12 +17,11 @@
       </ion-item>
 
         <section *ngIf="!results[i].players[playerIndex].noResult">
-          <stroke-input primary="true" label="Lyönnit" (totalChange)="onChange($event)" [(total)]="results[i].players[playerIndex].strokes"> </stroke-input>
-          <stroke-input label="Putit" (totalChange)="onChange($event)" [(total)]="results[i].players[playerIndex].putts"> </stroke-input>
-          <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [(total)]="results[i].players[playerIndex].sands"> </stroke-input>
-          <stroke-input label="Rangaistukset" (totalChange)="onChange($event)" [(total)]="results[i].players[playerIndex].penalties"> </stroke-input>
+          <stroke-input primary="true" label="Lyönnit" (totalChange)="onChange($event)" [total]="results[i].players[playerIndex].strokes"> </stroke-input>
+          <stroke-input label="Putit" (totalChange)="onChange($event)" [total]="results[i].players[playerIndex].putts"> </stroke-input>
+          <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [total]="results[i].players[playerIndex].sands"> </stroke-input>
+          <stroke-input label="Rangaistukset" (totalChange)="onChange($event)" [total]="results[i].players[playerIndex].penalties"> </stroke-input>
         </section>
-
 
      </ion-slide>
 

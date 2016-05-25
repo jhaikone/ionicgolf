@@ -3,11 +3,13 @@
   <ion-row class="stroke-input">
 
     <ion-col width-40>{{label}}</ion-col>
-    <ion-col end width-20 class="text-right" [ngClass]="{'primary': primary, 'secondary': !primary}">{{total.value}}</ion-col>
+    <ion-col end width-20 class="text-right" [ngClass]="{'primary': primary, 'secondary': !primary}">
+      <span *ngIf="showInput && total.value > 0">{{total.value}}</span>
+    </ion-col>
 
     <ion-col width-40>
       <ion-buttons end>
-        <button class="small-button" round primary (click)="decrease()" type="button">-</button>
+        <button class="small-button" round primary (click)="decrease(); showInput = true" type="button">-</button>
         <button class="small-button" round (click)="increase()" type="button">+</button>
       </ion-buttons>
     </ion-col>

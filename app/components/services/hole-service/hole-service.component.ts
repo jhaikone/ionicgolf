@@ -215,14 +215,14 @@ export class HoleService {
 
   private index:number;
   private results:Array<any> = [];
-  private courses: any;
+  private holes: any;
 
   constructor() {
     this.index = 0;
-    this.courses = COURSES;
+    this.holes = COURSES[0].holes
 
-    new Array(9).fill('mock').forEach(() => {
-      this.results.push(this.createPlayerModel())
+    new Array(9).fill('mock').map((mock, index) => {
+      this.results.push(this.createPlayerModel(index))
     });
 
   }
@@ -248,20 +248,21 @@ export class HoleService {
   }
 
   getHoles() {
-    return this.courses[0].holes;
+    return this.holes;
   }
 
-  private createPlayerModel() {
+  private createPlayerModel(index) {
    let objectPlayers = [];
    let totalPlayers = players;
 
-   let strokes = {key: 'strokes', value: 3};
+   let strokes = {key: 'strokes', value: this.holes[index].par};
    let putts =  {key: 'putts', value: 2};
    let sands =  {key: 'sands', value: 0};
    let penalties = {key: 'penalties', value: 0};
+   let drive = {key: 'drive', value: 1};
 
    totalPlayers.forEach( (player)=> {
-     objectPlayers.push({name: player.name, id: player.id, strokes, putts, sands,penalties, noResult: false});
+     objectPlayers.push({name: player.name, id: player.id, strokes, putts, sands, penalties, drive, noResult: false});
    })
 
    return {
