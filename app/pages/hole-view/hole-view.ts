@@ -2,6 +2,7 @@ import {Page, Slides} from 'ionic-angular';
 import { StrokeInputComponent } from '../../components/directives/stroke-input/stroke-input.component';
 import { HoleService } from '../../components/services/hole-service/hole-service.component';
 
+
 @Page({
   templateUrl: 'build/pages/hole-view/hole-view.html',
   directives: [StrokeInputComponent],

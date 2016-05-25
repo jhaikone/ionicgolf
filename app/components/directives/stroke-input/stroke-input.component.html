@@ -9,8 +9,8 @@
 
     <ion-col width-40>
       <ion-buttons end>
-        <button class="small-button" round primary (click)="decrease(); showInput = true" type="button">-</button>
-        <button class="small-button" round (click)="increase()" type="button">+</button>
+        <button round (click)="decrease(); showInput = true" type="button"><ion-icon name="remove"></ion-icon></button>
+        <button round (click)="increase()"><ion-icon name="add"></ion-icon></button>
       </ion-buttons>
     </ion-col>
 

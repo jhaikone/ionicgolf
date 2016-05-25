@@ -1,3 +1,5 @@
+@import 'globals.core';
+
 .content {
 
   .top {
@@ -36,4 +38,8 @@ ion-slide {
 
 .no-background {
   background: none;
+}
+
+.font-avarage {
+  font-size: map-get($fonts, 'big');
 }

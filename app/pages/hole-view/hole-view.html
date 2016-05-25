@@ -1,7 +1,7 @@
 <ion-toolbar class="menu-bar" position="top">
 
   <ion-row class="stroke-input">
-    <ion-col width-33>Väylä {{currentIndex+1}}</ion-col>
+    <ion-col width-33><ion-icon name="flag"></ion-icon> <span>{{currentIndex+1}}</span> </ion-col>
     <ion-col class="text-center" width-33>Par {{holes[currentIndex].par}}</ion-col>
   </ion-row>
 </ion-toolbar>
@@ -11,12 +11,17 @@
 
      <ion-slide class="top" *ngFor="let hole of availableHoles; let i = index">
 
+       <ion-row>
+         <ion-col col-50> <ion-icon class="font-avarage" name="person"></ion-icon> </ion-col>
+         <ion-col col-50> <ion-icon class="font-avarage" name="people"></ion-icon> </ion-col>
+       </ion-row>
+
       <ion-item>
         <ion-label>Pallo taskuun</ion-label>
         <ion-toggle [(ngModel)]="results[i].players[playerIndex].noResult"></ion-toggle>
       </ion-item>
 
-        <section *ngIf="!results[i].players[playerIndex].noResult">
+        <section [hidden]="results[i].players[playerIndex].noResult">
           <stroke-input primary="true" label="Lyönnit" (totalChange)="onChange($event)" [total]="results[i].players[playerIndex].strokes"> </stroke-input>
           <stroke-input label="Putit" (totalChange)="onChange($event)" [total]="results[i].players[playerIndex].putts"> </stroke-input>
           <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [total]="results[i].players[playerIndex].sands"> </stroke-input>
@@ -31,8 +36,8 @@
 
 <ion-toolbar class="menu-bar" position="bottom">
   <ion-row class="stroke-input">
-    <ion-col col-33><button *ngIf="!isFirstHole" clear (click)="previous()"> <i> < </i> </button> </ion-col>
+    <ion-col col-33><button *ngIf="!isFirstHole" clear (click)="previous()"> <ion-icon name="arrow-back"> </ion-icon> </button> </ion-col>
     <ion-col col-33><button *ngIf="isLastHole">Lopeta kierros</button></ion-col>
-    <ion-col col-33 class="text-right"><button *ngIf="!isLastHole" clear (click)="next()" ><i>></i></button></ion-col>
+    <ion-col col-33 class="text-right"><button *ngIf="!isLastHole" clear (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button></ion-col>
   </ion-row>
 </ion-toolbar>
