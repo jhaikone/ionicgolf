@@ -17,6 +17,7 @@ export class HoleViewPage {
   playerIndex: number = 0;
   isLastHole: boolean = false;
   isFirstHole: boolean = true;
+  isActive: boolean = true;
 
   slider:any;
   options:any;
@@ -25,7 +26,6 @@ export class HoleViewPage {
   currentPlayer: any;
   results: any;
   holes: any;
-
 
   constructor(holeService: HoleService) {
 

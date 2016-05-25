@@ -10,6 +10,16 @@ let players = [
     id: 33442,
     hcp: 20,
     name:"Jesse"
+  },
+  {
+    id: 43442,
+    hcp: 23,
+    name:"Jaska"
+  },
+  {
+    id: 53442,
+    hcp: 10,
+    name:"Pekka"
   }
 ];
 

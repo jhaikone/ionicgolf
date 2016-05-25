@@ -1,14 +1,13 @@
 @import 'globals.core';
 
-.content {
 
-  .top {
-    align-items: inherit;
-  }
 
-  .swiper-slide {
-    overflow-y: auto;
-  }
+.top {
+  align-items: inherit;
+}
+
+.swiper-slide {
+  overflow-y: auto;
 }
 
 .item {
@@ -40,6 +39,26 @@ ion-slide {
   background: none;
 }
 
-.font-avarage {
+.font-big {
   font-size: map-get($fonts, 'big');
+}
+
+.font-avarage {
+  font-size: map-get($fonts, 'avarage');
+}
+
+.multiplayers {
+  height: 75px;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+
+  ion-col {
+    position: relative;
+  }
+  .player {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+  }
 }

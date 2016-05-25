@@ -6,20 +6,31 @@
   </ion-row>
 </ion-toolbar>
 
-<ion-content class="content">
+<ion-content>
    <ion-slides (didChange)="onSlideChanged()" slider="slider" [options]="options">
 
      <ion-slide class="top" *ngFor="let hole of availableHoles; let i = index">
 
-       <ion-row>
-         <ion-col col-50> <ion-icon class="font-avarage" name="person"></ion-icon> </ion-col>
-         <ion-col col-50> <ion-icon class="font-avarage" name="people"></ion-icon> </ion-col>
+       <ion-row class="multiplayers">
+         <ion-col col-25> <ion-icon (click)="playerIndex=0" [attr.primary]="playerIndex === 0 ? true : null" class="font-big" name="person">
+           <span class="font-avarage player">{{results[i].players[0].name}}</span>
+         </ion-icon> </ion-col>
+
+         <ion-col col-25> <ion-icon (click)="playerIndex=1" [attr.primary]="playerIndex === 1 ? true : null" class="font-big" name="person">
+            <span class="font-avarage player">{{results[i].players[1].name}}</span>
+         </ion-icon> </ion-col>
+         <ion-col col-25> <ion-icon (click)="playerIndex=2" [attr.primary]="playerIndex === 2 ? true : null" class="font-big" name="person">
+           <span class="font-avarage player">{{results[i].players[2].name}}</span>
+         </ion-icon> </ion-col>
+         <ion-col col-25> <ion-icon (click)="playerIndex=3" [attr.primary]="playerIndex === 3 ? true : null" class="font-big" name="person">
+          <span class="font-avarage player">{{results[i].players[3].name}}</span>
+         </ion-icon> </ion-col>
        </ion-row>
 
-      <ion-item>
-        <ion-label>Pallo taskuun</ion-label>
-        <ion-toggle [(ngModel)]="results[i].players[playerIndex].noResult"></ion-toggle>
-      </ion-item>
+        <ion-item>
+          <ion-label>Pallo taskuun</ion-label>
+          <ion-toggle [(ngModel)]="results[i].players[playerIndex].noResult"></ion-toggle>
+        </ion-item>
 
         <section [hidden]="results[i].players[playerIndex].noResult">
           <stroke-input primary="true" label="Lyönnit" (totalChange)="onChange($event)" [total]="results[i].players[playerIndex].strokes"> </stroke-input>
