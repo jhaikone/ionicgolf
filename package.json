@@ -32,9 +32,12 @@
     "cordova-plugin-statusbar",
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-crosswalk-webview"
   ],
-  "cordovaPlatforms": [],
+  "cordovaPlatforms": [
+    "android"
+  ],
   "name": "golfionic",
   "description": "golfionic: An Ionic project"
 }
