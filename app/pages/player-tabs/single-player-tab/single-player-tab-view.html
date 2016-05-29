@@ -1,0 +1,54 @@
+
+<!-- <ion-row class="multiplayers text-center">
+  <ion-col col-25> <ion-icon (click)="playerIndex=0" [attr.primary]="playerIndex === 0 ? true : null" class="font-big" name="person">
+    <span class="font-avarage player">{{results[0].players[0].name}}</span>
+  </ion-icon> </ion-col>
+
+  <ion-col col-25> <ion-icon (click)="playerIndex=1" [attr.primary]="playerIndex === 1 ? true : null" class="font-big" name="person">
+     <span class="font-avarage player">{{results[0].players[1].name}}</span>
+  </ion-icon> </ion-col>
+  <ion-col col-25> <ion-icon (click)="playerIndex=2" [attr.primary]="playerIndex === 2 ? true : null" class="font-big" name="person">
+    <span class="font-avarage player">{{results[0].players[2].name}}</span>
+  </ion-icon> </ion-col>
+  <ion-col col-25> <ion-icon (click)="playerIndex=3" [attr.primary]="playerIndex === 3 ? true : null" class="font-big" name="person">
+   <span class="font-avarage player">{{results[0].players[3].name}}</span>
+  </ion-icon> </ion-col>
+</ion-row> -->
+
+<ion-content>
+   <ion-slides (didChange)="onSlideChanged()" slider="slider" [options]="options">
+
+     <ion-slide class="top" *ngFor="let hole of availableHoles">
+
+        <ion-item>
+          <ion-label>Pallo taskuun</ion-label>
+          <ion-toggle [(ngModel)]="model.holes[hole.index].results.noResult"></ion-toggle>
+        </ion-item>
+
+        <section [hidden]="model.holes[hole.index].results.noResult">
+          <stroke-input primary="true" label="Lyönnit" (totalChange)="onChange($event)" [total]="model.holes[hole.index].results.strokes"> </stroke-input>
+          <stroke-input label="Putit" (totalChange)="onChange($event)" [total]="model.holes[hole.index].results.putts"> </stroke-input>
+          <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [total]="model.holes[hole.index].results.sands"> </stroke-input>
+          <stroke-input label="Rangaistukset" (totalChange)="onChange($event)" [total]="model.holes[hole.index].results.penalties"> </stroke-input>
+        </section>
+
+        <!-- <section *ngIf="playerIndex === 1" [hidden]="results[hole.index].players[1].noResult">
+          <stroke-input primary="true" label="Lyönnit" (totalChange)="onChange($event)" [total]="results[hole.index].players[1].strokes"> </stroke-input>
+          <stroke-input label="Putit" (totalChange)="onChange($event)" [total]="results[hole.index].players[1].putts"> </stroke-input>
+          <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [total]="results[hole.index].players[1].sands"> </stroke-input>
+          <stroke-input label="Rangaistukset" (totalChange)="onChange($event)" [total]="results[hole.index].players[1].penalties"> </stroke-input>
+        </section> -->
+
+     </ion-slide>
+
+   </ion-slides>
+
+</ion-content>
+
+<ion-toolbar class="menu-bar" position="bottom">
+  <ion-row class="stroke-input">
+    <ion-col col-33><button *ngIf="!isFirstHole" clear (click)="previous()"> <ion-icon name="arrow-back"> </ion-icon> </button> </ion-col>
+    <ion-col col-33><button *ngIf="isLastHole">Lopeta kierros</button></ion-col>
+    <ion-col col-33 class="text-right"><button *ngIf="!isLastHole" clear (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button></ion-col>
+  </ion-row>
+</ion-toolbar>

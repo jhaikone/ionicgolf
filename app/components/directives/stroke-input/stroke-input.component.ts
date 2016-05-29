@@ -35,6 +35,7 @@ export class StrokeInputComponent implements OnInit {
     let minimumValue:number = this.total.key === 'strokes' ? 1 : 0;
     if(this.total.value > minimumValue ) {
         this.total.value--;
+        console.log('total', this.totalChange);
         this.totalChange.emit(this.total);
     }
 

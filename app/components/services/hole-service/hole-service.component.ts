@@ -1,11 +1,6 @@
-import  { Injectable } from '@angular/core';
+import  { Injectable, EventEmitter } from '@angular/core';
 
 let players = [
-  {
-    id: 24244,
-    hcp: 36,
-    name:"Juuso"
-  },
   {
     id: 33442,
     hcp: 20,
@@ -224,7 +219,7 @@ const COURSES = [
 export class HoleService {
 
   private index:number;
-  private results:Array<any> = [];
+  private model:any = {holes: []};
   private holes: any;
 
   constructor() {
@@ -232,9 +227,32 @@ export class HoleService {
     this.holes = COURSES[0].holes
 
     new Array(9).fill('mock').map((mock, index) => {
-      this.results.push(this.createPlayerModel(index))
-    });
 
+      let object = { results:
+        {
+          strokes: {value:this.holes[index].par, key: 'strokes'},
+          putts: {value: 2, key: 'putts'},
+          sands: {value: 0, key: 'sands'},
+          penalties: {value: 0, key: 'penalties'},
+          drive: {value: 1, key: 'drive'},
+        },
+        multiplayers: []
+      };
+
+      players.map((player) => {
+        object.multiplayers.push(
+          {
+            id: player.id,
+            name: player.name,
+            strokes: {value:this.holes[index].par, key: 'strokes'}
+          }
+        );
+      })
+
+      this.model.holes[index] = object;
+
+    });
+    console.log(this.model);
   }
 
   getIndex() {
@@ -246,19 +264,23 @@ export class HoleService {
   }
 
   getModel() {
-    return this.results[this.index];
+    return this.model[this.index];
   }
 
   getResultAt(index) {
-    return this.results[index];
+    return this.model[index];
   }
 
   getResults() {
-    return this.results;
+    return this.model;
   }
 
   getHoles() {
     return this.holes;
+  }
+
+  getPar() {
+    return this.holes[this.index].par;
   }
 
   private createPlayerModel(index) {

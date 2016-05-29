@@ -1,10 +1,7 @@
-import {ViewChild} from '@angular/core';
 import {App, Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {HelloIonicPage} from './pages/hello-ionic/hello-ionic';
-import {ListPage} from './pages/list/list';
 import {HoleViewPage} from './pages/hole-view/hole-view';
-
+import {SinglePlayerPage} from './pages/player-tabs/single-player-tab/single-player-tab';
 
 
 @App({
@@ -12,11 +9,8 @@ import {HoleViewPage} from './pages/hole-view/hole-view';
   config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 class MyApp {
-  @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
   rootPage: any = HoleViewPage;
-  pages: Array<{title: string, component: any}>;
 
   constructor(
     private platform: Platform,
@@ -24,12 +18,6 @@ class MyApp {
   ) {
     this.initializeApp();
 
-    // set our app's pages
-    this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'My First List', component: ListPage },
-      { title: 'Hole view', component: HoleViewPage }
-    ];
   }
 
   initializeApp() {
@@ -40,10 +28,4 @@ class MyApp {
     });
   }
 
-  openPage(page) {
-    // close the menu when clicking a link from the menu
-    this.menu.close();
-    // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
-  }
 }

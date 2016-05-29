@@ -1,0 +1,25 @@
+
+<ion-content>
+   <ion-slides (didChange)="onSlideChanged()" slider="slider" [options]="options">
+
+     <ion-slide class="top" *ngFor="let hole of availableHoles">
+
+        <section>
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[0].name}}" [total]="model.holes[hole.index].multiplayers[0].strokes"> </stroke-input>
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[1].name}}" [total]="model.holes[hole.index].multiplayers[1].strokes"> </stroke-input>
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[2].name}}" [total]="model.holes[hole.index].multiplayers[2].strokes"> </stroke-input>
+        </section>
+
+     </ion-slide>
+
+   </ion-slides>
+
+</ion-content>
+
+<ion-toolbar class="menu-bar" position="bottom">
+  <ion-row class="stroke-input">
+    <ion-col col-33><button *ngIf="!isFirstHole" clear (click)="previous()"> <ion-icon name="arrow-back"> </ion-icon> </button> </ion-col>
+    <ion-col col-33><button *ngIf="isLastHole">Lopeta kierros</button></ion-col>
+    <ion-col col-33 class="text-right"><button *ngIf="!isLastHole" clear (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button></ion-col>
+  </ion-row>
+</ion-toolbar>
