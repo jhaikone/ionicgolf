@@ -1,4 +1,3 @@
-import { EventEmitter } from '@angular/core';
 import { Page, Slides } from 'ionic-angular';
 import { HoleService } from '../../components/services/hole-service/hole-service.component';
 

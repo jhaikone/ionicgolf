@@ -6,8 +6,7 @@ import { AbstractTabController } from '../abstract-tab-controller';
 
 @Page({
   templateUrl: 'build/pages/player-tabs/single-player-tab/single-player-tab-view.html',
-  directives: [StrokeInputComponent],
-  providers: [HoleService]
+  directives: [StrokeInputComponent]
 })
 
 export class SinglePlayerPage extends AbstractTabController {

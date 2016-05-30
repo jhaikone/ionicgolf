@@ -1,9 +1,9 @@
-<ion-navbar class="menu-bar" position="top">
+<ion-toolbar class="menu-bar" position="top">
   <ion-row class="stroke-input">
-    <ion-col width-33><ion-icon name="flag"></ion-icon> <span>1</span> </ion-col>
-    <ion-col class="text-center" width-33><span>{{holeService.getIndex()}}</span></ion-col>
+    <ion-col width-33><ion-icon name="flag"></ion-icon> <span>{{getHole()}}</span> </ion-col>
+    <ion-col class="text-center" width-33><span >Par {{getPar()}}</span></ion-col>
   </ion-row>
-</ion-navbar>
+</ion-toolbar>
 
 <ion-tabs>
   <ion-tab tabIcon="person" [root]="singlePlayerRoot"></ion-tab>

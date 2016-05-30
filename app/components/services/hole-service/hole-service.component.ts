@@ -1,4 +1,4 @@
-import  { Injectable, EventEmitter } from '@angular/core';
+import  { Injectable } from '@angular/core';
 
 let players = [
   {
@@ -218,8 +218,8 @@ const COURSES = [
 @Injectable()
 export class HoleService {
 
-  private index:number;
-  private model:any = {holes: []};
+  private index: number;
+  private model: any = {holes: []};
   private holes: any;
 
   constructor() {
