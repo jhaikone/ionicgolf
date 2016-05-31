@@ -1,3 +1,4 @@
+import {DomSanitizationService} from '@angular/platform-browser';
 import {Page, Slides} from 'ionic-angular';
 import { StrokeInputComponent } from '../../../components/directives/stroke-input/stroke-input.component';
 import { HoleService } from '../../../components/services/hole-service/hole-service.component';
@@ -11,66 +12,25 @@ import { AbstractTabController } from '../abstract-tab-controller';
 
 export class SinglePlayerPage extends AbstractTabController {
   holeIndex:number = 0;
+  degrees: any;
+  style: string;
+  multiPlayerSelected: boolean;
 
-  constructor(holeService: HoleService) {
+  constructor(holeService: HoleService, private sanitizer:DomSanitizationService) {
     super(holeService);
-    console.log('single', this.model);
-  }
-
-  /* onChange is triggered if any of the inputs' values are changed
-  ** Primary total is strokes. Secondary total is all the rest
-  */
-  onChange(event) {
-    this.result = this.model.holes[this.holeIndex].results;
-    if(event.key === 'strokes') {
-      this._decreaseSecondaryTotal(event);
-    } else {
-      this.increasePrimaryTotal()
-    }
-  }
-
-  /* increase strokes if the rest are greater*/
-  increasePrimaryTotal() {
-    let total: number = this.result.putts.value + this.result.sands.value + this.result.penalties.value + this.result.drive.value;
-    if(total > this.result.strokes.value) {
-      this.result.strokes.value = total;
-    }
-  }
-
-  /* decrease rest if strokes is greater */
-  _decreaseSecondaryTotal(event) {
-
-    this._initSecondaryValue(event);
-
-    let total:number = this.result.putts.value + this.result.sands.value + this.result.penalties.value + this.result.drive.value;
-
-    if (this.result.strokes.value < total) {
-      if (this.result.penalties.value > 0) {
-        this.result.penalties.value = this.result.penalties.value -1;
-      } else if (this.result.sands.value > 0) {
-        this.result.sands.value = this.result.sands.value -1;
-      } else {
-        this.result.putts.value = this.result.putts.value -1;
-      }
-    }
+    this.sanitizer = sanitizer;
+    this.style = "transform: translate3d(0px ,0px, 0px) scaleX(180)";
 
   }
 
-  _initSecondaryValue(event) {
-    switch (event.key) {
-      case 'putts': {
-        this.result.putts.value = event.value;
-        break;
-      }
-      case 'sands': {
-        this.result.sands.value = event.value;
-        break;
-      }
-      case 'penalties': {
-        this.result.penalties.value = event.value;
-        break;
-      }
-    }
+  getStyle() {
+    let style = "transform: translate3d(0px ,0px, 0px) scaleX(180)";
+    return this.sanitizer.bypassSecurityTrustStyle(this.style);
+  }
+
+  setStyle(xPosition) {
+    this.style = 'transform: translate3d(' + xPosition + ',0px, 0px) scaleX(180)';
+    console.log('thisstyle', this.style);
   }
 
 }

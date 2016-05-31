@@ -1,13 +1,13 @@
 
 <ion-content>
-   <ion-slides (didChange)="onSlideChanged()" slider="slider" [options]="options">
+   <ion-slides #mySlider (didChange)="onSlideChanged()" slider="slider" [options]="options">
 
      <ion-slide class="top" *ngFor="let hole of availableHoles">
 
         <section>
-          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[0].name}}" [total]="model.holes[hole.index].multiplayers[0].strokes"> </stroke-input>
-          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[1].name}}" [total]="model.holes[hole.index].multiplayers[1].strokes"> </stroke-input>
-          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[2].name}}" [total]="model.holes[hole.index].multiplayers[2].strokes"> </stroke-input>
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[0].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[0].strokes"> </stroke-input>
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[1].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[1].strokes"> </stroke-input>
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[2].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[2].strokes"> </stroke-input>
         </section>
 
      </ion-slide>

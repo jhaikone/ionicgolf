@@ -1,5 +1,8 @@
 @import 'globals.core';
 
+tab-highlight {
+    transform: translate3d(180px, 0px, 0px) scaleX(180) !important;
+}
 
 
 .top {

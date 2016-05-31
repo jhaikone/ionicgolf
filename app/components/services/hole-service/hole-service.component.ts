@@ -239,7 +239,7 @@ export class HoleService {
         multiplayers: []
       };
 
-      players.map((player) => {
+      players.map((player, index) => {
         object.multiplayers.push(
           {
             id: player.id,
@@ -268,7 +268,13 @@ export class HoleService {
   }
 
   getResultAt(index) {
-    return this.model[index];
+    return this.model.holes[index].results;
+  }
+
+  getMultiPlayerResultAt(index) {
+    console.log('model', this.model);
+    console.log('index', index);
+    return this.model.holes[this.index].multiplayers;
   }
 
   getResults() {

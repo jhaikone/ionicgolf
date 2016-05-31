@@ -1,44 +1,50 @@
 
-<!-- <ion-row class="multiplayers text-center">
-  <ion-col col-25> <ion-icon (click)="playerIndex=0" [attr.primary]="playerIndex === 0 ? true : null" class="font-big" name="person">
-    <span class="font-avarage player">{{results[0].players[0].name}}</span>
-  </ion-icon> </ion-col>
-
-  <ion-col col-25> <ion-icon (click)="playerIndex=1" [attr.primary]="playerIndex === 1 ? true : null" class="font-big" name="person">
-     <span class="font-avarage player">{{results[0].players[1].name}}</span>
-  </ion-icon> </ion-col>
-  <ion-col col-25> <ion-icon (click)="playerIndex=2" [attr.primary]="playerIndex === 2 ? true : null" class="font-big" name="person">
-    <span class="font-avarage player">{{results[0].players[2].name}}</span>
-  </ion-icon> </ion-col>
-  <ion-col col-25> <ion-icon (click)="playerIndex=3" [attr.primary]="playerIndex === 3 ? true : null" class="font-big" name="person">
-   <span class="font-avarage player">{{results[0].players[3].name}}</span>
-  </ion-icon> </ion-col>
-</ion-row> -->
-
 
 <ion-content>
-   <ion-slides (didChange)="onSlideChanged()" slider="slider" [options]="options">
 
-     <ion-slide class="top" *ngFor="let hole of availableHoles">
+  <ion-toolbar class="menu-bar" position="top">
+    <ion-row class="stroke-input">
+      <ion-col width-33><ion-icon name="flag"></ion-icon> <span>{{getHole()}}</span> </ion-col>
+      <ion-col class="text-center" width-33><span >Par {{getPar()}}</span></ion-col>
+    </ion-row>
+  </ion-toolbar>
 
-        <ion-item>
+  <ion-tabbar-section>
+    <tabbar role="tablist">
+      <a class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-0" aria-controls="tabpanel-0-0" [attr.aria-selected]="!multiPlayerSelected">
+        <ion-icon (click)="setStyle('0'); multiPlayerSelected = false" class="tab-button-icon ion-md-person" role="img" aria-label="person"></ion-icon><ion-button-effect></ion-button-effect>
+      </a>
+
+    <a class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-1" aria-controls="tabpanel-0-1"  [attr.aria-selected]="multiPlayerSelected">
+      <ion-icon (click)="setStyle('180px'); multiPlayerSelected = true" class="tab-button-icon ion-md-people" role="img" aria-label="people"></ion-icon>
+      <ion-button-effect></ion-button-effect>
+    </a>
+
+      <tab-highlight [attr.style]="getStyle()" style="transform: translate3d(0px, 0px, 0px) scaleX(180)" class="animate testi"></tab-highlight>
+    </tabbar>
+  </ion-tabbar-section>
+
+   <ion-slides #mySlider (didChange)="onSlideChanged()" slider="slider" [options]="options">
+
+     <ion-slide class="top" *ngFor="let hole of availableHoles; let i = index">
+
+        <ion-item [hidden]="multiPlayerSelected">
           <ion-label>Pallo taskuun</ion-label>
           <ion-toggle [(ngModel)]="model.holes[hole.index].results.noResult"></ion-toggle>
         </ion-item>
 
-        <section [hidden]="model.holes[hole.index].results.noResult">
-          <stroke-input primary="true" label="Lyönnit" (totalChange)="onChange($event)" [total]="model.holes[hole.index].results.strokes"> </stroke-input>
-          <stroke-input label="Putit" (totalChange)="onChange($event)" [total]="model.holes[hole.index].results.putts"> </stroke-input>
-          <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [total]="model.holes[hole.index].results.sands"> </stroke-input>
-          <stroke-input label="Rangaistukset" (totalChange)="onChange($event)" [total]="model.holes[hole.index].results.penalties"> </stroke-input>
+        <section [hidden]="multiPlayerSelected" [hidden]="model.holes[hole.index].results.noResult">
+          <stroke-input primary="true" label="Lyönnit" [index]="hole.index" [total]="model.holes[hole.index].results.strokes"> </stroke-input>
+          <stroke-input label="Putit" [index]="hole.index" [total]="model.holes[hole.index].results.putts"> </stroke-input>
+          <stroke-input label="Hiekkalyönnit" [index]="hole.index" [total]="model.holes[hole.index].results.sands"> </stroke-input>
+          <stroke-input label="Rangaistukset" [index]="hole.index" [total]="model.holes[hole.index].results.penalties"> </stroke-input>
         </section>
 
-        <!-- <section *ngIf="playerIndex === 1" [hidden]="results[hole.index].players[1].noResult">
-          <stroke-input primary="true" label="Lyönnit" (totalChange)="onChange($event)" [total]="results[hole.index].players[1].strokes"> </stroke-input>
-          <stroke-input label="Putit" (totalChange)="onChange($event)" [total]="results[hole.index].players[1].putts"> </stroke-input>
-          <stroke-input label="Hiekkalyönnit" (totalChange)="onChange($event)" [total]="results[hole.index].players[1].sands"> </stroke-input>
-          <stroke-input label="Rangaistukset" (totalChange)="onChange($event)" [total]="results[hole.index].players[1].penalties"> </stroke-input>
-        </section> -->
+        <section [hidden]="!multiPlayerSelected">
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[0].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[0].strokes"> </stroke-input>
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[1].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[1].strokes"> </stroke-input>
+          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[2].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[2].strokes"> </stroke-input>
+        </section>
 
      </ion-slide>
 

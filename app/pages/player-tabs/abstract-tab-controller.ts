@@ -31,10 +31,12 @@ export class AbstractTabController {
   }
 
   private initCurrentIndex() {
+        console.log('active', this.slider);
     this.holeService.setIndex(this.slider.activeIndex);
   }
 
   next() {
+    console.log('active', this.slider.activeIndex);
     this.isFirstHole = false;
     this.slider.slideNext();
     this.isLastHole = this.slider.isEnd;
@@ -54,6 +56,14 @@ export class AbstractTabController {
     this.isFirstHole = this.slider.isBeginning;
     console.log('index', this.holeService.getIndex());
 
+  }
+
+  getHole() {
+    return this.holeService.getIndex()+1;
+  }
+
+  getPar() {
+    return this.holeService.getPar();
   }
 
 }
