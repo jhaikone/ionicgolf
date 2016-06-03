@@ -2,6 +2,7 @@ import {App, Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HoleViewPage} from './pages/hole-view/hole-view';
 import {SinglePlayerPage} from './pages/player-tabs/single-player-tab/single-player-tab';
+import { InformationPage } from './pages/information/information-page';
 import { HoleService } from './components/services/hole-service/hole-service.component';
 
 
@@ -12,7 +13,8 @@ import { HoleService } from './components/services/hole-service/hole-service.com
 })
 class MyApp {
 
-  rootPage: any = SinglePlayerPage;
+  // rootPage: any = SinglePlayerPage;
+  rootPage: any = InformationPage;
 
   constructor(
     private platform: Platform,

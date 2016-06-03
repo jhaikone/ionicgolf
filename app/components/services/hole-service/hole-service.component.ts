@@ -224,9 +224,9 @@ export class HoleService {
 
   constructor() {
     this.index = 0;
-    this.holes = COURSES[0].holes
+    this.holes = COURSES[0].holes;
 
-    new Array(9).fill('mock').map((mock, index) => {
+    this.holes.map((mock, index) => {
 
       let object = { results:
         {
@@ -252,7 +252,6 @@ export class HoleService {
       this.model.holes[index] = object;
 
     });
-    console.log(this.model);
   }
 
   getIndex() {
@@ -272,13 +271,15 @@ export class HoleService {
   }
 
   getMultiPlayerResultAt(index) {
-    console.log('model', this.model);
-    console.log('index', index);
     return this.model.holes[this.index].multiplayers;
   }
 
   getResults() {
     return this.model;
+  }
+
+  getResult() {
+    return this.model.holes[this.index];
   }
 
   getHoles() {
@@ -287,6 +288,45 @@ export class HoleService {
 
   getPar() {
     return this.holes[this.index].par;
+  }
+
+  getInformation() {
+    let information = {
+      players: [
+        {
+          holeInOne: {},
+          albatross: {
+            amount: 0,
+            holes: []
+          },
+          eagle: {
+            amount: 0,
+            holes: [5]
+          },
+          birdie: {
+            amount: 1,
+            hole: [2]
+          },
+          par: {
+            amount: 1,
+            hole: [1,3,4,7]
+          },
+          bogey: {
+            amount: 1,
+            hole: [8],
+          },
+          doubleBogey: {
+            amount: 2,
+            hole: [6]
+          },
+          tripeBogey: {
+            amount: 1,
+            hole: [9]
+          }
+        }
+      ]
+    }
+    return information;
   }
 
   private createPlayerModel(index) {

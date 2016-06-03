@@ -11,12 +11,12 @@
 
   <ion-tabbar-section>
     <tabbar role="tablist">
-      <a class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-0" aria-controls="tabpanel-0-0" [attr.aria-selected]="!multiPlayerSelected">
-        <ion-icon (click)="setStyle('0'); multiPlayerSelected = false" class="tab-button-icon ion-md-person" role="img" aria-label="person"></ion-icon><ion-button-effect></ion-button-effect>
+      <a  (click)="setStyle('0'); multiPlayerSelected = false" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-0" aria-controls="tabpanel-0-0" [attr.aria-selected]="!multiPlayerSelected">
+        <ion-icon class="tab-button-icon ion-md-person" role="img" aria-label="person"></ion-icon><ion-button-effect></ion-button-effect>
       </a>
 
-    <a class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-1" aria-controls="tabpanel-0-1"  [attr.aria-selected]="multiPlayerSelected">
-      <ion-icon (click)="setStyle('180px'); multiPlayerSelected = true" class="tab-button-icon ion-md-people" role="img" aria-label="people"></ion-icon>
+    <a (click)="setStyle('50vw'); multiPlayerSelected = true" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-1" aria-controls="tabpanel-0-1"  [attr.aria-selected]="multiPlayerSelected">
+      <ion-icon class="tab-button-icon ion-md-people" role="img" aria-label="people"></ion-icon>
       <ion-button-effect></ion-button-effect>
     </a>
 
@@ -24,7 +24,7 @@
     </tabbar>
   </ion-tabbar-section>
 
-   <ion-slides #mySlider (didChange)="onSlideChanged()" slider="slider" [options]="options">
+   <ion-slides #mySlider (onStart)="testaus()" (didChange)="onSlideChanged()" slider="slider" [options]="options">
 
      <ion-slide class="top" *ngFor="let hole of availableHoles; let i = index">
 
@@ -55,7 +55,7 @@
 <ion-toolbar class="menu-bar" position="bottom">
   <ion-row class="stroke-input">
     <ion-col col-33><button *ngIf="!isFirstHole" clear (click)="previous()"> <ion-icon name="arrow-back"> </ion-icon> </button> </ion-col>
-    <ion-col col-33><button *ngIf="isLastHole">Lopeta kierros</button></ion-col>
+    <ion-col col-33><button (click)="endRound()" *ngIf="isLastHole">Lopeta kierros</button></ion-col>
     <ion-col col-33 class="text-right"><button *ngIf="!isLastHole" clear (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button></ion-col>
   </ion-row>
 </ion-toolbar>

@@ -23,9 +23,8 @@ export class StrokeInputComponent implements OnInit{
   }
 
   ngOnInit() {
-    console.log('mukt', this.multiplayer);
+
     if(this.multiplayer) {
-      console.log('hole', this.index);
       this.result = this.holeService.getMultiPlayerResultAt();
     } else {
       this.result = this.holeService.getResultAt(this.index);
@@ -34,7 +33,7 @@ export class StrokeInputComponent implements OnInit{
 
   increase() {
     let isPrimary = this.total.key === 'strokes' || this.total.key === 'putts' ? true : false;
-    console.log('increase', this.total);
+
     if(this.showInput || !isPrimary) {
       this.total.value++;
     }

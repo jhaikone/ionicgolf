@@ -19,7 +19,8 @@ export class AbstractTabController {
 
     this.holeService = holeService;
 
-    this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
+    // this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
+    this.availableHoles = [{index: 0},{index:1}];
     this.holes = this.holeService.getHoles();
     this.model = this.holeService.getResults();
 
@@ -31,12 +32,10 @@ export class AbstractTabController {
   }
 
   private initCurrentIndex() {
-        console.log('active', this.slider);
     this.holeService.setIndex(this.slider.activeIndex);
   }
 
   next() {
-    console.log('active', this.slider.activeIndex);
     this.isFirstHole = false;
     this.slider.slideNext();
     this.isLastHole = this.slider.isEnd;
@@ -54,8 +53,10 @@ export class AbstractTabController {
     this.initCurrentIndex();
     this.isLastHole = this.slider.isEnd;
     this.isFirstHole = this.slider.isBeginning;
-    console.log('index', this.holeService.getIndex());
+  }
 
+  testaus() {
+    console.log('gegegeg');
   }
 
   getHole() {
