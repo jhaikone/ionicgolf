@@ -5,14 +5,14 @@
     </ion-row>
   </ion-toolbar>
 
-  <ion-card *ngFor="let player of players">
+  <ion-card dark *ngFor="let player of players">
     <ion-card-content>
-      <ion-card-title>{{player.name}}</ion-card-title>
+      <ion-card-title><span light>{{player.name}}</span></ion-card-title>
 
       <ion-grid>
         <ion-row>
-            <ion-col width-50><h2>Tulos</h2><h1 primary>{{player.score}}</h1></ion-col>
-            <ion-col width-50><h2>Putit</h2><h1 primary>{{player.putts}}</h1></ion-col>
+            <ion-col width-50><h2 light>Tulos</h2><h1 primary>{{player.score}}</h1></ion-col>
+            <ion-col width-50><h2 light>Putit</h2><h1 secondary>{{player.putts}}</h1></ion-col>
         </ion-row>
     </ion-grid>
 

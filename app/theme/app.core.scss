@@ -18,3 +18,12 @@
 @import "../components/directives/stroke-input/stroke-input.component";
 
 @import "../icons/ionicons";
+
+
+tabbar {
+  background: color($colors, dark);
+}
+
+.toggle-inner {
+  background-color: color($colors, light);
+}
