@@ -5,18 +5,17 @@
     </ion-row>
   </ion-toolbar>
 
-
-  <ion-card>
-    <canvas id="myChart" height="200"></canvas>
-
+  <ion-card *ngFor="let player of players">
     <ion-card-content>
-      <ion-card-title>
-        Nine Inch Nails Live
-        </ion-card-title>
-      <p>
-        The most popular industrial group ever, and largely
-        responsible for bringing the music to a mass audience.
-      </p>
+      <ion-card-title>{{player.name}}</ion-card-title>
+
+      <ion-grid>
+        <ion-row>
+            <ion-col width-50><h2>Tulos</h2><h1 primary>{{player.score}}</h1></ion-col>
+            <ion-col width-50><h2>Putit</h2><h1 primary>{{player.putts}}</h1></ion-col>
+        </ion-row>
+    </ion-grid>
+
     </ion-card-content>
   </ion-card>
 

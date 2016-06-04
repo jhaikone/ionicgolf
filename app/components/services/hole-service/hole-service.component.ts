@@ -294,34 +294,75 @@ export class HoleService {
     let information = {
       players: [
         {
-          holeInOne: {},
-          albatross: {
-            amount: 0,
-            holes: []
-          },
-          eagle: {
-            amount: 0,
-            holes: [5]
-          },
-          birdie: {
-            amount: 1,
-            hole: [2]
-          },
-          par: {
-            amount: 1,
-            hole: [1,3,4,7]
-          },
-          bogey: {
-            amount: 1,
-            hole: [8],
-          },
-          doubleBogey: {
-            amount: 2,
-            hole: [6]
-          },
-          tripeBogey: {
-            amount: 1,
-            hole: [9]
+          name: 'Juuso',
+          score: 84,
+          putts: 40,
+          statistics: {
+              holeInOne: {},
+              albatross: {
+                amount: 0,
+                holes: []
+              },
+              eagle: {
+                amount: 0,
+                holes: [5]
+              },
+              birdie: {
+                amount: 1,
+                hole: [2]
+              },
+              par: {
+                amount: 1,
+                hole: [1,3,4,7]
+              },
+              bogey: {
+                amount: 1,
+                hole: [8],
+              },
+              doubleBogey: {
+                amount: 2,
+                hole: [6]
+              },
+              tripeBogey: {
+                amount: 1,
+                hole: [9]
+            }
+          }
+        },
+        {
+          name: 'Jesse',
+          score: 78,
+          putts: 37,
+          statistics: {
+              holeInOne: {},
+              albatross: {
+                amount: 0,
+                holes: []
+              },
+              eagle: {
+                amount: 0,
+                holes: [5]
+              },
+              birdie: {
+                amount: 1,
+                hole: [2]
+              },
+              par: {
+                amount: 1,
+                hole: [1,3,4,7]
+              },
+              bogey: {
+                amount: 1,
+                hole: [8],
+              },
+              doubleBogey: {
+                amount: 2,
+                hole: [6]
+              },
+              tripeBogey: {
+                amount: 1,
+                hole: [9]
+            }
           }
         }
       ]

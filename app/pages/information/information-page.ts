@@ -1,5 +1,8 @@
 import { Page } from 'ionic-angular';
+
 import { HoleService } from '../../components/services/hole-service/hole-service.component';
+
+
 
 
 
@@ -9,11 +12,12 @@ import { HoleService } from '../../components/services/hole-service/hole-service
 
 export class InformationPage  {
 
-  ctx: any;
-
+  information: any;
+  players: any;
 
   constructor(holeService: HoleService) {
-      this.ctx = document.getElementById("myChart");
+    this.information = holeService.getInformation();
+    this.players = this.information.players;
   }
 
 
