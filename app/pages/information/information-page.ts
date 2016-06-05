@@ -13,11 +13,13 @@ import { HoleService } from '../../components/services/hole-service/hole-service
 export class InformationPage  {
 
   information: any;
-  players: any;
+  player: any;
+  friends: any;
 
   constructor(holeService: HoleService) {
     this.information = holeService.getInformation();
-    this.players = this.information.players;
+    this.friends = this.information.friends;
+    this.player = this.information.player;
   }
 
 

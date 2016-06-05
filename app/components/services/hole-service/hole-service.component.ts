@@ -239,7 +239,7 @@ export class HoleService {
         multiplayers: []
       };
 
-      players.map((player, index) => {
+      players.map((player) => {
         object.multiplayers.push(
           {
             id: player.id,
@@ -291,7 +291,7 @@ export class HoleService {
   }
 
   getInformation() {
-    let information = {
+    let mock = {
       players: [
         {
           name: 'Juuso',
@@ -367,6 +367,36 @@ export class HoleService {
         }
       ]
     }
+
+    let information = {
+      player: {
+        name: 'Juuso', score: 0, putts: 0, penalties: 0, sands: 0,
+      },
+      friends: []
+    };
+
+    this.model.holes[0].multiplayers.map((multiplayer) => {
+      information.friends.push({name: multiplayer.name, score: 0});
+    });
+
+
+
+    for (let hole of this.model.holes) {
+      information.player.score = information.player.score + hole.results.strokes.value;
+
+      information.player.putts = information.player.putts + hole.results.putts.value;
+      information.player.sands = information.player.sands + hole.results.sands.value;
+      information.player.penalties = information.player.penalties + hole.results.penalties.value;
+
+      for(let i = 0; i < information.friends.length; i++) {
+        information.friends[i].score = information.friends[i].score + hole.multiplayers[i].strokes.value;
+      }
+
+    }
+    console.log('model', this.model.holes);
+
+    console.log('information', information);
+
     return information;
   }
 

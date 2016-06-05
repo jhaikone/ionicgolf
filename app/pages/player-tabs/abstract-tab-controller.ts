@@ -19,8 +19,7 @@ export class AbstractTabController {
 
     this.holeService = holeService;
 
-    // this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
-    this.availableHoles = [{index: 0},{index:1}];
+    this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
     this.holes = this.holeService.getHoles();
     this.model = this.holeService.getResults();
 
