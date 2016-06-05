@@ -36,19 +36,32 @@ $colors: (
 );
 */
 
+$colors: (
+  primary:    #94BB69,
+  secondary:  #b3b132,
+  danger:     #f53d3d,
+  light:      #a7a7a7,
+  dark:       #313131,
+  favorite:   #69BB7B
+);
 
-//
-//   primary:    #94BB69,
-//   secondary:  #b3b132,
-//   danger:     #f53d3d,
-//   light:      #a7a7a7,
-//   dark:       #313131,
-//   favorite:   #69BB7B
-// );
+$fonts: (
+  big: 40px,
+  avarage: 22px
+);
 
+$text-color: #656565 !default;
+$list-text-color: $text-color !default;
+$toolbar-text-color: $text-color !default;
+
+ion-card-title {
+  color: $text-color !important;
+}
+
+/* Dark theme
 
 $colors: (
-primary: #aac987,
+primary: #aac98 ,
 secondary: #b3b132,
 danger: #f53d3d,
 light: #dedede,
@@ -67,7 +80,4 @@ $toolbar-text-color: $text-color !default;
 $toolbar-active-color: $link-color !default;
 $toolbar-inactive-color: #ffffff !default;
 
-$fonts: (
-  big: 40px,
-  avarage: 22px
-);
+*/

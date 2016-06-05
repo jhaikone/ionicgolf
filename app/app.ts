@@ -13,8 +13,8 @@ import { HoleService } from './components/services/hole-service/hole-service.com
 })
 class MyApp {
 
-  rootPage: any = SinglePlayerPage;
-  // rootPage: any = InformationPage;
+  // rootPage: any = SinglePlayerPage;
+  rootPage: any = InformationPage;
 
   constructor(
     private platform: Platform,
