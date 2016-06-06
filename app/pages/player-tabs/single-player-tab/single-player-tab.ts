@@ -1,8 +1,8 @@
 import {DomSanitizationService} from '@angular/platform-browser';
 import {Page, Slides, NavController} from 'ionic-angular';
+
 import { StrokeInputComponent } from '../../../components/directives/stroke-input/stroke-input.component';
 import { HoleService } from '../../../components/services/hole-service/hole-service.component';
-import { AbstractTabController } from '../abstract-tab-controller';
 import { InformationPage } from '../../information/information-page';
 
 
@@ -11,21 +11,79 @@ import { InformationPage } from '../../information/information-page';
   directives: [StrokeInputComponent]
 })
 
-export class SinglePlayerPage extends AbstractTabController {
-  holeIndex:number = 0;
-  degrees: any;
-  style: string;
-  multiPlayerSelected: boolean;
+export class SinglePlayerPage {
+
+  holeService: HoleService;
   nav: NavController;
 
+  isLastHole: boolean = false;
+  isFirstHole: boolean = true;
+  multiPlayerSelected: boolean;
+
+  holeIndex:number = 0;
+  style: string;
+
+  slider:any;
+  options:any;
+  availableHoles:any;
+  model: any;
+  result: any;
+  holes: any;
+
   constructor(holeService: HoleService, private sanitizer:DomSanitizationService, nav: NavController) {
-    super(holeService);
     this.sanitizer = sanitizer;
     this.nav = nav;
+    this.holeService = holeService;
+
+    this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
+    this.holes = this.holeService.getHoles();
+    this.model = this.holeService.getResults();
+
+    this.options = {
+      speed: 150,
+      onInit: (slides: any) => this.slider = slides
+    }
 
     this.style = "transform: translate3d(0px ,0px, 0px) scaleX(180)";
 
   }
+
+
+    private initCurrentIndex() {
+      this.holeService.setIndex(this.slider.activeIndex);
+    }
+
+    next() {
+      this.isFirstHole = false;
+      this.slider.slideNext();
+      this.isLastHole = this.slider.isEnd;
+      this.initCurrentIndex();
+    }
+
+    previous() {
+      this.isLastHole = false;
+      this.slider.slidePrev();
+      this.initCurrentIndex();
+      this.isFirstHole = this.slider.isBeginning;
+    }
+
+    onSlideChanged() {
+      this.initCurrentIndex();
+      this.isLastHole = this.slider.isEnd;
+      this.isFirstHole = this.slider.isBeginning;
+    }
+
+    testaus() {
+      console.log('gegegeg');
+    }
+
+    getHole() {
+      return this.holeService.getIndex()+1;
+    }
+
+    getPar() {
+      return this.holeService.getPar();
+    }
 
   getStyle() {
     let style = "transform: translate3d(0px ,0px, 0px) scaleX(50vw)";

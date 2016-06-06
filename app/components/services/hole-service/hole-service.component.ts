@@ -290,87 +290,27 @@ export class HoleService {
     return this.holes[this.index].par;
   }
 
-  getInformation() {
-    let mock = {
-      players: [
-        {
-          name: 'Juuso',
-          score: 84,
-          putts: 40,
-          statistics: {
-              holeInOne: {},
-              albatross: {
-                amount: 0,
-                holes: []
-              },
-              eagle: {
-                amount: 0,
-                holes: [5]
-              },
-              birdie: {
-                amount: 1,
-                hole: [2]
-              },
-              par: {
-                amount: 1,
-                hole: [1,3,4,7]
-              },
-              bogey: {
-                amount: 1,
-                hole: [8],
-              },
-              doubleBogey: {
-                amount: 2,
-                hole: [6]
-              },
-              tripeBogey: {
-                amount: 1,
-                hole: [9]
-            }
-          }
-        },
-        {
-          name: 'Jesse',
-          score: 78,
-          putts: 37,
-          statistics: {
-              holeInOne: {},
-              albatross: {
-                amount: 0,
-                holes: []
-              },
-              eagle: {
-                amount: 0,
-                holes: [5]
-              },
-              birdie: {
-                amount: 1,
-                hole: [2]
-              },
-              par: {
-                amount: 1,
-                hole: [1,3,4,7]
-              },
-              bogey: {
-                amount: 1,
-                hole: [8],
-              },
-              doubleBogey: {
-                amount: 2,
-                hole: [6]
-              },
-              tripeBogey: {
-                amount: 1,
-                hole: [9]
-            }
-          }
-        }
-      ]
-    }
+  private getParAt(index) {
+    return this.holes[index].par;
+  }
 
+
+  getInformation() {
+    
     let information = {
       player: {
-        name: 'Juuso', score: 0, putts: 0, penalties: 0, sands: 0,
+        name: 'Juuso', score: 0, putts: 0, penalties: 0, sands: 0, statistics: {
+          holeInOne: {amount: 0, holes: []},
+          albatross: {amount: 0, holes: []},
+          eagle: {amount: 0, holes: []},
+          birdie: {amount: 0, holes: []},
+          par: {amount: 0, holes: []},
+          bogey: {amount: 0, holes: []},
+          doubleBogey: {amount: 0, holes: []},
+          tripleBogey: {amount: 0, holes: []},
+          rest: {amount: 0, holes: []}
+        }
+
       },
       friends: []
     };
@@ -379,7 +319,8 @@ export class HoleService {
       information.friends.push({name: multiplayer.name, score: 0});
     });
 
-
+    let holeIndex = 0;
+    let statistics = information.player.statistics;
 
     for (let hole of this.model.holes) {
       information.player.score = information.player.score + hole.results.strokes.value;
@@ -388,16 +329,78 @@ export class HoleService {
       information.player.sands = information.player.sands + hole.results.sands.value;
       information.player.penalties = information.player.penalties + hole.results.penalties.value;
 
-      for(let i = 0; i < information.friends.length; i++) {
+      this.updateStatistics(statistics, hole, holeIndex);
+
+      holeIndex++;
+
+      for (let i = 0; i < information.friends.length; i++) {
         information.friends[i].score = information.friends[i].score + hole.multiplayers[i].strokes.value;
       }
 
     }
-    console.log('model', this.model.holes);
-
     console.log('information', information);
-
     return information;
+  }
+
+  private updateStatistics(statistics, hole, holeIndex) {
+    let par = this.getParAt(holeIndex)
+
+    switch(hole.results.strokes.value - par) {
+      case -4: {
+        statistics.holeInOne.amount = statistics.holeInOne.amount+1;
+        statistics.holeInOne.holes.push(holeIndex);
+        break;
+      }
+      case -3: {
+        if(par === 4) {
+          statistics.holeInOne.amount = statistics.holeInOne.amount+1;
+          statistics.holeInOne.holes.push(holeIndex);
+        } else {
+          statistics.albatross.amount = statistics.albatross.amount+1;
+          statistics.albatross.holes.push(holeIndex);
+        }
+        break;
+      }
+      case -2: {
+        if(par === 3) {
+          statistics.holeInOne.amount = statistics.holeInOne.amount+1;
+          statistics.holeInOne.holes.push(holeIndex);
+        } else {
+          statistics.eagle.amount = statistics.eagle.amount+1;
+          statistics.eagle.holes.push(holeIndex);
+        }
+        break;
+      }
+      case -1: {
+        statistics.birdie.amount = statistics.birdie.amount+1;
+        statistics.birdie.holes.push(holeIndex);
+        break;
+      }
+      case 0: {
+        statistics.par.amount = statistics.par.amount+1;
+        statistics.par.holes.push(holeIndex);
+        break;
+      }
+      case 1: {
+        statistics.bogey.amount = statistics.bogey.amount+1;
+        statistics.bogey.holes.push(holeIndex);
+        break;
+      }
+      case 2: {
+        statistics.doubleBogey.amount = statistics.doubleBogey.amount+1;
+        statistics.doubleBogey.holes.push(holeIndex);
+        break;
+      }
+      case 3: {
+        statistics.tripleBogey.amount = statistics.tripleBogey.amount+1;
+        statistics.tripleBogey.holes.push(holeIndex);
+        break;
+      }
+      default: {
+        statistics.rest.amount = statistics.rest.amount+1;
+        statistics.rest.holes.push(holeIndex);
+      }
+    }
   }
 
   private createPlayerModel(index) {
