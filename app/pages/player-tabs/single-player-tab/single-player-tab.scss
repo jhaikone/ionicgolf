@@ -1,4 +1,3 @@
-@import 'globals.core';
 
 .top {
   align-items: inherit;
@@ -17,8 +16,13 @@
 }
 
 .menu-bar {
+  min-height: 55px;
   color: color($colors, primary);
   font-size: color($fonts, avarage);
+}
+
+.toolbar-background {
+  background: color($colors, dark);
 }
 
 .toolbar-background {

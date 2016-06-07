@@ -1,9 +1,10 @@
 import {DomSanitizationService} from '@angular/platform-browser';
-import {Page, Slides, NavController} from 'ionic-angular';
+import {Page, Slides, NavController, Modal} from 'ionic-angular';
 
 import { StrokeInputComponent } from '../../../components/directives/stroke-input/stroke-input.component';
 import { HoleService } from '../../../components/services/hole-service/hole-service.component';
 import { InformationPage } from '../../information/information-page';
+import { AchievementsPage } from '../../achievements/achievements-page';
 
 
 @Page({
@@ -51,6 +52,11 @@ export class SinglePlayerPage {
 
     private initCurrentIndex() {
       this.holeService.setIndex(this.slider.activeIndex);
+    }
+
+    showAchievements() {
+      let achievementsPage = Modal.create(AchievementsPage);
+      this.nav.present(achievementsPage);
     }
 
     next() {

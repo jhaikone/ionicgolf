@@ -1,14 +1,15 @@
 
+<ion-toolbar class="menu-bar" position="top">
+  <ion-row class="stroke-input">
+    <ion-col width-25><ion-icon name="flag"></ion-icon> <span>{{getHole()}}</span> </ion-col>
+    <ion-col class="text-center" width-25><span >Par {{getPar()}}</span></ion-col>
+    <ion-col class="text-center" width-25><span >250m</span></ion-col>
+    <ion-col width-25 text-right><button (click)="showAchievements()"><ion-icon name="trophy"></ion-icon></button> </ion-col>
+  </ion-row>
 
-<ion-content>
+</ion-toolbar>
 
-  <ion-toolbar class="menu-bar" position="top">
-    <ion-row class="stroke-input">
-      <ion-col width-33><ion-icon name="flag"></ion-icon> <span>{{getHole()}}</span> </ion-col>
-      <ion-col class="text-center" width-33><span >Par {{getPar()}}</span></ion-col>
-    </ion-row>
-  </ion-toolbar>
-
+<div class="custom-tab">
   <ion-tabbar-section>
     <tabbar role="tablist">
       <a  (click)="setStyle('0'); multiPlayerSelected = false" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-0" aria-controls="tabpanel-0-0" [attr.aria-selected]="!multiPlayerSelected">
@@ -23,6 +24,11 @@
       <tab-highlight [attr.style]="getStyle()" style="transform: translate3d(0px, 0px, 0px) scaleX(180)" class="animate testi"></tab-highlight>
     </tabbar>
   </ion-tabbar-section>
+</div>
+
+<ion-content>
+
+  <scroll-content>
 
    <ion-slides #mySlider (onStart)="testaus()" (didChange)="onSlideChanged()" slider="slider" [options]="options">
 
@@ -34,6 +40,10 @@
         </ion-item>
 
         <section [hidden]="multiPlayerSelected" [hidden]="model.holes[hole.index].results.noResult">
+          <stroke-input primary="true" label="Lyönnit" [index]="hole.index" [total]="model.holes[hole.index].results.strokes"> </stroke-input>
+          <stroke-input label="Putit" [index]="hole.index" [total]="model.holes[hole.index].results.putts"> </stroke-input>
+          <stroke-input label="Hiekkalyönnit" [index]="hole.index" [total]="model.holes[hole.index].results.sands"> </stroke-input>
+          <stroke-input label="Rangaistukset" [index]="hole.index" [total]="model.holes[hole.index].results.penalties"> </stroke-input>
           <stroke-input primary="true" label="Lyönnit" [index]="hole.index" [total]="model.holes[hole.index].results.strokes"> </stroke-input>
           <stroke-input label="Putit" [index]="hole.index" [total]="model.holes[hole.index].results.putts"> </stroke-input>
           <stroke-input label="Hiekkalyönnit" [index]="hole.index" [total]="model.holes[hole.index].results.sands"> </stroke-input>
@@ -50,9 +60,11 @@
 
    </ion-slides>
 
+</scroll-content>
+
 </ion-content>
 
-<ion-toolbar class="menu-bar" position="bottom">
+<ion-toolbar position="bottom">
   <ion-row class="stroke-input">
     <ion-col col-33><button *ngIf="!isFirstHole" clear (click)="previous()"> <ion-icon name="arrow-back"> </ion-icon> </button> </ion-col>
     <ion-col col-33><button (click)="endRound()" *ngIf="isLastHole">Lopeta kierros</button></ion-col>
