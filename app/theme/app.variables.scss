@@ -58,26 +58,24 @@ ion-card-title {
   color: $text-color !important;
 }
 
-/* Dark theme
+//Dark theme
 
-$colors: (
-primary: #aac98 ,
-secondary: #b3b132,
-danger: #f53d3d,
-light: #dedede,
-dark: #333,
-) !default;
-
-$text-color: #fff !default;
-$background-color: #333 !default;
-$list-text-color: $text-color !default;
-$list-background-color: $background-color !default;
-$list-border-color: #666 !default;
-$link-color: map-get($colors, primary) !default;
-$toolbar-background-color: #111 !default;
-$toolbar-border-color: #000 !default;
-$toolbar-text-color: $text-color !default;
-$toolbar-active-color: $link-color !default;
-$toolbar-inactive-color: #ffffff !default;
-
-*/
+// $colors: (
+// primary: #aac98 ,
+// secondary: #b3b132,
+// danger: #f53d3d,
+// light: #dedede,
+// dark: #333,
+// ) !default;
+//
+// $text-color: #fff !default;
+// $background-color: #333 !default;
+// $list-text-color: $text-color !default;
+// $list-background-color: $background-color !default;
+// $list-border-color: #666 !default;
+// $link-color: map-get($colors, primary) !default;
+// $toolbar-background-color: #111 !default;
+// $toolbar-border-color: #000 !default;
+// $toolbar-text-color: $text-color !default;
+// $toolbar-active-color: $link-color !default;
+// $toolbar-inactive-color: #ffffff !default;

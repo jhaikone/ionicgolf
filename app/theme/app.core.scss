@@ -20,18 +20,14 @@
 @import "../pages/player-tabs/single-player-tab/single-player-tab";
 
 
-/* Dark theme
-
-tabbar {
-  background: color($colors, dark);
-}
-
-.toggle-inner {
-  background-color: color($colors, light);
-}
-
-*/
-
 scroll-content {
   overflow-y: auto;
 }
+
+// tabbar {
+//   background: color($colors, dark);
+// }
+//
+// .toggle-inner {
+//   background-color: color($colors, light);
+// }
