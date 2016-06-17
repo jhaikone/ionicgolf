@@ -267,6 +267,8 @@ export class HoleService {
   }
 
   getResultAt(index) {
+    if(index === -1) return {};
+    console.log('onmde', index);
     return this.model.holes[index].results;
   }
 
@@ -296,7 +298,7 @@ export class HoleService {
 
 
   getInformation() {
-    
+
     let information = {
       player: {
         name: 'Juuso', score: 0, putts: 0, penalties: 0, sands: 0, statistics: {

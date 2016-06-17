@@ -1,0 +1,79 @@
+<div class="slide-content">
+
+ <ion-grid>
+   <ion-row class="stroke-input">
+
+     <ion-col width-40>Lyönnit</ion-col>
+     <ion-col end width-20 class="text-right" class="primary">
+       <span>{{holeService.getResult().results.strokes.value}}</span>
+     </ion-col>
+
+     <ion-col width-40>
+       <ion-buttons end>
+         <button round (click)="decreaseStrokes()" type="button"><ion-icon name="remove"></ion-icon></button>
+         <button round (click)="increaseStrokes()"><ion-icon name="add"></ion-icon></button>
+       </ion-buttons>
+     </ion-col>
+
+   </ion-row>
+
+ </ion-grid>
+
+ <ion-grid>
+   <ion-row class="stroke-input">
+
+     <ion-col width-40>Putit</ion-col>
+     <ion-col end width-20 class="text-right" class="secondary">
+       <span>{{holeService.getResult().results.putts.value}}</span>
+     </ion-col>
+
+     <ion-col width-40>
+       <ion-buttons end>
+         <button round (click)="decrease('putts'); showInput = true" type="button"><ion-icon name="remove"></ion-icon></button>
+         <button round (click)="increase('putts')"><ion-icon name="add"></ion-icon></button>
+       </ion-buttons>
+     </ion-col>
+
+   </ion-row>
+
+ </ion-grid>
+
+ <ion-grid>
+   <ion-row class="stroke-input">
+
+     <ion-col width-40>Hiekkalyönnit</ion-col>
+     <ion-col end width-20 class="text-right" class="secondary">
+       <span>{{holeService.getResult().results.sands.value}}</span>
+     </ion-col>
+
+     <ion-col width-40>
+       <ion-buttons end>
+         <button round (click)="decrease('sands')" type="button"><ion-icon name="remove"></ion-icon></button>
+         <button round (click)="increase('sands')"><ion-icon name="add"></ion-icon></button>
+       </ion-buttons>
+     </ion-col>
+
+   </ion-row>
+
+ </ion-grid>
+
+ <ion-grid>
+   <ion-row class="stroke-input">
+
+     <ion-col width-40>Rangaistukset</ion-col>
+     <ion-col end width-20 class="text-right" class="secondary">
+       <span>{{holeService.getResult().results.penalties.value}}</span>
+     </ion-col>
+
+     <ion-col width-40>
+       <ion-buttons end>
+         <button round (click)="decrease('penalties')" type="button"><ion-icon name="remove"></ion-icon></button>
+         <button round (click)="increase('penalties')"><ion-icon name="add"></ion-icon></button>
+       </ion-buttons>
+     </ion-col>
+
+   </ion-row>
+
+ </ion-grid>
+
+</div>

@@ -1,11 +1,12 @@
-import {Page} from 'ionic-angular';
+import  { Component } from '@angular/core';
 import { StrokeInputComponent } from '../../components/directives/stroke-input/stroke-input.component';
 
 
-@Page({
+@Component({
   templateUrl: 'build/pages/hello-ionic/hello-ionic.html',
   directives: [StrokeInputComponent]
 })
+
 export class HelloIonicPage {
 
   strokes: number;

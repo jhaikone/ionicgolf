@@ -1,12 +1,8 @@
-import { Page } from 'ionic-angular';
+import { Component } from '@angular/core';
 
 import { HoleService } from '../../components/services/hole-service/hole-service.component';
 
-
-
-
-
-@Page({
+@Component({
   templateUrl: 'build/pages/information/information-page.html'
 })
 

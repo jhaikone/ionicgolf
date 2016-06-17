@@ -1,15 +1,19 @@
-import {DomSanitizationService} from '@angular/platform-browser';
-import {Page, Slides, NavController, Modal} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { DomSanitizationService } from '@angular/platform-browser';
+
+import { Slides, NavController, Modal } from 'ionic-angular';
 
 import { StrokeInputComponent } from '../../../components/directives/stroke-input/stroke-input.component';
+import { HoleComponent } from '../../../components/directives/hole/hole.component';
+import { PanDirective } from '../../../components/directives/gestures/pan';
 import { HoleService } from '../../../components/services/hole-service/hole-service.component';
 import { InformationPage } from '../../information/information-page';
 import { AchievementsPage } from '../../achievements/achievements-page';
 
 
-@Page({
+@Component({
   templateUrl: 'build/pages/player-tabs/single-player-tab/single-player-tab-view.html',
-  directives: [StrokeInputComponent]
+  directives: [StrokeInputComponent, PanDirective, HoleComponent]
 })
 
 export class SinglePlayerPage {
@@ -21,7 +25,7 @@ export class SinglePlayerPage {
   isFirstHole: boolean = true;
   multiPlayerSelected: boolean;
 
-  holeIndex:number = 0;
+  holeIndex:number;
   style: string;
 
   slider:any;
@@ -39,6 +43,7 @@ export class SinglePlayerPage {
     this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
     this.holes = this.holeService.getHoles();
     this.model = this.holeService.getResults();
+    this.holeIndex = this.holeService.getIndex();
 
     this.options = {
       speed: 150,
@@ -104,6 +109,12 @@ export class SinglePlayerPage {
   endRound() {
     console.log('results', this.holeService.getResults());
     this.nav.push(InformationPage, {});
+  }
+
+  getObject(key) {
+    console.log(this.holeIndex);
+    if(this.holeIndex === -1) return {};
+    return this.model.holes[this.holeIndex].results[key];
   }
 
 }

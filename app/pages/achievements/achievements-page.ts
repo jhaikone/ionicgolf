@@ -1,6 +1,7 @@
-import { Page, ViewController } from 'ionic-angular';
+import  { Component } from '@angular/core';
+import { ViewController } from 'ionic-angular';
 
-@Page({
+@Component({
   template: `
   <ion-content padding>
     <h2>I'm a modal!</h2>

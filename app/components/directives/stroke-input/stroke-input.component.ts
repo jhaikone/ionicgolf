@@ -23,7 +23,7 @@ export class StrokeInputComponent implements OnInit{
   }
 
   ngOnInit() {
-
+    if(this.index < 0) return;
     if(this.multiplayer) {
       this.result = this.holeService.getMultiPlayerResultAt();
     } else {

@@ -1,6 +1,6 @@
 <ion-grid>
-
-  <ion-row class="stroke-input">
+  {{index}}
+  <ion-row class="stroke-input" [hidden]="index === -1">
 
     <ion-col width-40>{{label}}</ion-col>
     <ion-col end width-20 class="text-right" [ngClass]="{'primary': primary, 'secondary': !primary}">

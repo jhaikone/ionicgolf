@@ -28,9 +28,9 @@
 
 <ion-content>
 
-  <scroll-content>
 
-   <ion-slides #mySlider (onStart)="testaus()" (didChange)="onSlideChanged()" slider="slider" [options]="options">
+<!--
+   <ion-slides #mySlider (onStart)="testaus()" (ionDidChange)="onSlideChanged()" slider="slider" [options]="options">
 
      <ion-slide class="top" *ngFor="let hole of availableHoles; let i = index">
 
@@ -54,9 +54,15 @@
 
      </ion-slide>
 
-   </ion-slides>
+   </ion-slides> -->
 
-</scroll-content>
+   <div [hidden]="multiPlayerSelected" [hidden]="model.holes[0].results.noResult" class="carousel-wrap" pan>
+
+     <hole id="floating-content-0"></hole>
+     <hole id="floating-content-1"></hole>
+     <hole id="floating-content-2"></hole>
+
+   </div>
 
 </ion-content>
 

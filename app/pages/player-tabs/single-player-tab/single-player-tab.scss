@@ -1,4 +1,55 @@
 
+#floating-content-0 {
+  position: absolute;
+  height: 100%;
+  left: -100%;
+  width: 100%;
+}
+
+#floating-content-1 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+
+}
+
+#floating-content-2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 100%;
+}
+
+.carousel-wrap {
+  position:absolute;
+  background: white;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+.animate {
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+}
+
+.slide-content {
+
+  position: absolute;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top:16px;
+  -webkit-overflow-scrolling: touch;
+
+  &.hide-scroll-y {
+    overflow-y: hidden !important;
+  }
+}
+
+
+
 .top {
   align-items: inherit;
 }
