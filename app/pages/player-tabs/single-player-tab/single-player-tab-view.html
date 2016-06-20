@@ -1,10 +1,9 @@
 
 <ion-toolbar class="menu-bar" position="top">
   <ion-row class="stroke-input">
-    <ion-col width-25><ion-icon name="flag"></ion-icon> <span>{{getHole()}}</span> </ion-col>
-    <ion-col class="text-center" width-25><span >Par {{getPar()}}</span></ion-col>
-    <ion-col class="text-center" width-25><span >250m</span></ion-col>
-    <ion-col width-25 text-right><button (click)="showAchievements()"><ion-icon name="trophy"></ion-icon></button> </ion-col>
+    <ion-col width-33><ion-icon name="flag"></ion-icon> <span>{{getHole()}}</span> </ion-col>
+    <ion-col class="text-center" width-33><span >Par {{getPar()}}</span></ion-col>
+    <ion-col width-33 text-right><button (click)="showAchievements()"><ion-icon name="trophy"></ion-icon></button> </ion-col>
   </ion-row>
 
 </ion-toolbar>
@@ -12,16 +11,16 @@
 <div class="custom-tab">
   <ion-tabbar-section>
     <tabbar role="tablist">
-      <a  (click)="setStyle('0'); holeService.getResult().multiplayerTab = false" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-0" aria-controls="tabpanel-0-0" [attr.aria-selected]="!multiPlayerSelected">
+      <a  (click)="holeService.getResult().multiplayerTab = false" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-0" aria-controls="tabpanel-0-0" [attr.aria-selected]="!holeService.getResult().multiplayerTab">
         <ion-icon class="tab-button-icon ion-md-person" role="img" aria-label="person"></ion-icon><ion-button-effect></ion-button-effect>
       </a>
 
-    <a (click)="setStyle('50vw'); holeService.getResult().multiplayerTab = true" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-1" aria-controls="tabpanel-0-1"  [attr.aria-selected]="multiPlayerSelected">
+    <a (click)="holeService.getResult().multiplayerTab = true" class="tab-button has-icon icon-only disable-hover multiplayer" role="tab" id="tab-0-1" aria-controls="tabpanel-0-1"  [attr.aria-selected]="holeService.getResult().multiplayerTab">
       <ion-icon class="tab-button-icon ion-md-people" role="img" aria-label="people"></ion-icon>
       <ion-button-effect></ion-button-effect>
     </a>
 
-      <tab-highlight [attr.style]="getStyle()" style="transform: translate3d(0px, 0px, 0px) scaleX(180)" class="animate testi"></tab-highlight>
+      <tab-highlight [ngClass]="{'multiplayer': holeService.getResult().multiplayerTab}" class="tab-highlight animate"></tab-highlight>
     </tabbar>
   </ion-tabbar-section>
 </div>
@@ -30,8 +29,8 @@
 
    <div class="carousel-wrap" pan>
 
-     <hole id="floating-content-0"></hole>
-     <hole id="floating-content-1"></hole>
+     <hole holeChange="holeChangeEvent" id="floating-content-0"></hole>
+     <hole holeChange="holeChangeEvent" id="floating-content-1"></hole>
      <hole id="floating-content-2"></hole>
 
    </div>
@@ -41,7 +40,7 @@
 <ion-toolbar position="bottom">
   <ion-row class="stroke-input">
     <ion-col col-33><button *ngIf="holeService.getIndex() > 0" clear (click)="previous()"> <ion-icon name="arrow-back"> </ion-icon> </button> </ion-col>
-    <ion-col col-33><button (click)="endRound()" *ngIf="isLastHole">Lopeta kierros</button></ion-col>
+    <ion-col col-33><button (click)="endRound()" *ngIf="holeService.getIndex() === holeService.getHoles().length-1">Lopeta kierros</button></ion-col>
     <ion-col col-33 class="text-right"><button *ngIf="holeService.getIndex() < holeService.getHoles().length-1" clear (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button></ion-col>
   </ion-row>
 </ion-toolbar>

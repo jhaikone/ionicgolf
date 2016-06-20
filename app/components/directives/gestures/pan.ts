@@ -29,13 +29,24 @@ export class PanDirective implements OnInit, OnDestroy {
   positionX: number = 0;
   isMoveStarted: boolean = false;
   holeService: any;
+  listenFunc: any;
 
   constructor(el: ElementRef, holeService: HoleService, public renderer: Renderer) {
     this.el = el.nativeElement;
     this.holeService = holeService;
+
+    this.holeService.holeChanged$.subscribe(event => this.onHoleChange(event));
   }
 
   ngOnInit() {
+
+    this.renderer.listen(this.el, 'transitionend', (event) => {
+      if (event.propertyName === 'transform') {
+        event.preventDefault();
+        this.renderer.setElementStyle(this.el, '-webkit-transform', 'translate3d(0, 0, 0)');
+        this.renderer.setElementClass(this.el, 'animate', false);
+      }
+    });
 
     this.panGesture = new Gesture(
       this.el,
@@ -71,11 +82,11 @@ export class PanDirective implements OnInit, OnDestroy {
     })
 
     this.panGesture.on('panend', event => {
+      this.renderer.setElementClass(this.el, 'animate', false);
       if(this.isOnEdge()) {
         this.snapPosition = 0;
       } else if (Math.abs(event.deltaX) > 100 || Math.abs(event.overallVelocityX) > 0.5) {
         this.snapPosition = this.calculateSnapPosition();
-        console.log('update')
         this.updateHoleIndex();
       } else {
         this.snapPosition = 0;
@@ -91,14 +102,28 @@ export class PanDirective implements OnInit, OnDestroy {
     this.panGesture.destroy();
   }
 
+  onHoleChange(event) {
+    if (event.direction === 'next') {
+      this.direction = Direction.Next;
+    } else {
+      this.direction = Direction.Previous
+    }
+    this.snapPosition = this.calculateSnapPosition();
+    this.updateHoleIndex();
+
+    this.renderer.setElementClass(this.el, 'animate', true);
+    this.renderer.setElementStyle(this.el, '-webkit-transform', 'translate3d(' + this.snapPosition + '%, 0, 0)');
+  }
+
   private updateHoleIndex() {
     let index = this.holeService.getIndex();
+
     if (this.direction === Direction.Previous && index > 0) {
       this.holeService.setIndex(index-1);
     } else if (this.direction === Direction.Next && index < this.holeService.getHoles().length) {
       this.holeService.setIndex(index+1);
     }
-    console.log('this.holeS', this.holeService.getIndex());
+    this.holeService.getResult().multiplayerTab = false;
   }
 
   private calculateSnapPosition() {

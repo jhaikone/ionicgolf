@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HoleService } from '../../services/hole-service/hole-service.component';
 
 @Component({
@@ -6,25 +6,14 @@ import { HoleService } from '../../services/hole-service/hole-service.component'
   templateUrl: 'build/components/directives/hole/hole.component.html'
 })
 
-export class HoleComponent implements OnInit{
+export class HoleComponent {
 
-  showInput: boolean = false;
   holeService: any;
-  result: any;
-  total: any;
-
-  @Input() index: any;
-  @Input() multiplayer: boolean;
-  @Input() model: any;
 
   constructor(holeService: HoleService) {
     this.holeService = holeService;
-    console.log(holeService.getResult())
   }
 
-  ngOnInit() {
-      this.result = this.model;
-  }
 
   increaseStrokes() {
       this.holeService.getResult().singlePlayer.strokes.value++;

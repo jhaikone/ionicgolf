@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
+import { Component, Output, EventEmitter } from '@angular/core';
 
-import { Slides, NavController, Modal } from 'ionic-angular';
+import { NavController, Modal } from 'ionic-angular';
 
 import { StrokeInputComponent } from '../../../components/directives/stroke-input/stroke-input.component';
 import { HoleComponent } from '../../../components/directives/hole/hole.component';
@@ -28,35 +27,17 @@ export class SinglePlayerPage {
   holeIndex:number;
   style: string;
 
-  slider:any;
-  options:any;
-  availableHoles:any;
   model: any;
   result: any;
   holes: any;
 
-  constructor(holeService: HoleService, private sanitizer:DomSanitizationService, nav: NavController) {
-    this.sanitizer = sanitizer;
+  constructor(holeService: HoleService, nav: NavController) {
     this.nav = nav;
     this.holeService = holeService;
 
-    this.availableHoles = [{index: 0},{index:1},{index:2},{index:3},{index:4},{index:5},{index:6},{index:7},{index:8}];
     this.holes = this.holeService.getHoles();
     this.model = this.holeService.getResults();
     this.holeIndex = this.holeService.getIndex();
-
-    this.options = {
-      speed: 150,
-      onInit: (slides: any) => this.slider = slides
-    }
-
-    this.style = "transform: translate3d(0px ,0px, 0px) scaleX(180)";
-
-  }
-
-
-  private initCurrentIndex() {
-    this.holeService.setIndex(this.slider.activeIndex);
   }
 
   showAchievements() {
@@ -65,11 +46,17 @@ export class SinglePlayerPage {
   }
 
   next() {
-    this.holeService.setIndex(this.holeService.getIndex()+1);
+    //this.holeService.setIndex(this.holeService.getIndex()+1);
+    this.holeService.holeChanged$.emit({
+      direction: 'next'
+    });
   }
 
   previous() {
-    this.holeService.setIndex(this.holeService.getIndex()-1);
+    //this.holeService.setIndex(this.holeService.getIndex()-1);
+    this.holeService.holeChanged$.emit({
+      direction: 'previous'
+    });
   }
 
   getHole() {
@@ -78,16 +65,6 @@ export class SinglePlayerPage {
 
   getPar() {
     return this.holeService.getPar();
-  }
-
-  getStyle() {
-    let style = "transform: translate3d(0px ,0px, 0px) scaleX(50vw)";
-    return this.sanitizer.bypassSecurityTrustStyle(this.style);
-  }
-
-  setStyle(xPosition) {
-    let tabWidth = (window.innerWidth/2).toString();
-    this.style = 'transform: translate3d(' + xPosition + ',0px, 0px) scaleX('+tabWidth+')';
   }
 
   endRound() {
