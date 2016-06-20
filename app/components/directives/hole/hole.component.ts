@@ -27,28 +27,28 @@ export class HoleComponent implements OnInit{
   }
 
   increaseStrokes() {
-      this.holeService.getResult().results.strokes.value++;
+      this.holeService.getResult().singlePlayer.strokes.value++;
   }
 
   increase(key) {
-      this.holeService.getResult().results[key].value++;
+      this.holeService.getResult().singlePlayer[key].value++;
       this.increasePrimaryTotal();
   }
 
   decreaseStrokes() {
-    if(this.holeService.getResult().results.strokes.value > 1) {
-      this.holeService.getResult().results.strokes.value--;
+    if(this.holeService.getResult().singlePlayer.strokes.value > 1) {
+      this.holeService.getResult().singlePlayer.strokes.value--;
     }
     this._decreaseSecondaryTotal();
   }
 
   decrease(key) {
-    this.holeService.getResult().results[key].value--;
+    this.holeService.getResult().singlePlayer[key].value--;
   }
 
   /* increase strokes if the rest are greater*/
   increasePrimaryTotal() {
-    let result = this.holeService.getResult().results;
+    let result = this.holeService.getResult().singlePlayer;
 
     let total: number = result.putts.value + result.sands.value + result.penalties.value + result.drive.value;
     if(total > result.strokes.value) {
@@ -59,7 +59,7 @@ export class HoleComponent implements OnInit{
   /* decrease rest if strokes is greater */
   _decreaseSecondaryTotal() {
 
-    let result = this.holeService.getResult().results;
+    let result = this.holeService.getResult().singlePlayer;
 
     let total:number = result.putts.value + result.sands.value + result.penalties.value + result.drive.value;
     if (result.strokes.value < total) {

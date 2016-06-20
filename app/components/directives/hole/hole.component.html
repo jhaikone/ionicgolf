@@ -4,11 +4,11 @@
 
        <ion-item>
          <ion-label>Pallo taskuun</ion-label>
-         <ion-toggle [(ngModel)]="holeService.getResult().results.noResult"></ion-toggle>
+         <ion-toggle [(ngModel)]="holeService.getResult().singlePlayer.noResult"></ion-toggle>
        </ion-item>
 
 
-       <div [hidden]="holeService.getResult().results.noResult">
+       <div [hidden]="holeService.getResult().singlePlayer.noResult">
 
          <ion-grid>
 
@@ -16,7 +16,7 @@
 
             <ion-col width-40>Lyönnit</ion-col>
             <ion-col end width-20 class="primary text-right">
-              <span>{{holeService.getResult().results.strokes.value}}</span>
+              <span>{{holeService.getResult().singlePlayer.strokes.value}}</span>
             </ion-col>
 
             <ion-col width-40>
@@ -35,7 +35,7 @@
 
              <ion-col width-40>Putit</ion-col>
              <ion-col end width-20 class="secondary text-right">
-               <span>{{holeService.getResult().results.putts.value}}</span>
+               <span>{{holeService.getResult().singlePlayer.putts.value}}</span>
              </ion-col>
 
              <ion-col width-40>
@@ -54,7 +54,7 @@
 
              <ion-col width-40>Hiekkalyönnit</ion-col>
              <ion-col end width-20 class="secondary text-right">
-               <span>{{holeService.getResult().results.sands.value}}</span>
+               <span>{{holeService.getResult().singlePlayer.sands.value}}</span>
              </ion-col>
 
              <ion-col width-40>
@@ -73,7 +73,7 @@
 
              <ion-col width-40>Rangaistukset</ion-col>
              <ion-col end width-20 class="secondary text-right">
-               <span>{{holeService.getResult().results.penalties.value}}</span>
+               <span>{{holeService.getResult().singlePlayer.penalties.value}}</span>
              </ion-col>
 
              <ion-col width-40>

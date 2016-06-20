@@ -228,7 +228,7 @@ export class HoleService {
 
     this.holes.map((mock, index) => {
 
-      let object = { results:
+      let object = { singlePlayer:
         {
           strokes: {value:this.holes[index].par, key: 'strokes'},
           putts: {value: 2, key: 'putts'},
@@ -269,7 +269,7 @@ export class HoleService {
   getResultAt(index) {
     if(index === -1) return {};
     console.log('onmde', index);
-    return this.model.holes[index].results;
+    return this.model.holes[index].singlePlayer;
   }
 
   getMultiPlayerResultAt(index) {
@@ -325,11 +325,11 @@ export class HoleService {
     let statistics = information.player.statistics;
 
     for (let hole of this.model.holes) {
-      information.player.score = information.player.score + hole.results.strokes.value;
+      information.player.score = information.player.score + hole.singlePlayer.strokes.value;
 
-      information.player.putts = information.player.putts + hole.results.putts.value;
-      information.player.sands = information.player.sands + hole.results.sands.value;
-      information.player.penalties = information.player.penalties + hole.results.penalties.value;
+      information.player.putts = information.player.putts + hole.singlePlayer.putts.value;
+      information.player.sands = information.player.sands + hole.singlePlayer.sands.value;
+      information.player.penalties = information.player.penalties + hole.singlePlayer.penalties.value;
 
       this.updateStatistics(statistics, hole, holeIndex);
 
@@ -347,7 +347,7 @@ export class HoleService {
   private updateStatistics(statistics, hole, holeIndex) {
     let par = this.getParAt(holeIndex)
 
-    switch(hole.results.strokes.value - par) {
+    switch(hole.singlePlayer.strokes.value - par) {
       case -4: {
         statistics.holeInOne.amount = statistics.holeInOne.amount+1;
         statistics.holeInOne.holes.push(holeIndex);
