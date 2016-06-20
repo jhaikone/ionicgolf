@@ -12,11 +12,11 @@
 <div class="custom-tab">
   <ion-tabbar-section>
     <tabbar role="tablist">
-      <a  (click)="setStyle('0'); multiPlayerSelected = false" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-0" aria-controls="tabpanel-0-0" [attr.aria-selected]="!multiPlayerSelected">
+      <a  (click)="setStyle('0'); holeService.getResult().multiplayerTab = false" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-0" aria-controls="tabpanel-0-0" [attr.aria-selected]="!multiPlayerSelected">
         <ion-icon class="tab-button-icon ion-md-person" role="img" aria-label="person"></ion-icon><ion-button-effect></ion-button-effect>
       </a>
 
-    <a (click)="setStyle('50vw'); multiPlayerSelected = true" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-1" aria-controls="tabpanel-0-1"  [attr.aria-selected]="multiPlayerSelected">
+    <a (click)="setStyle('50vw'); holeService.getResult().multiplayerTab = true" class="tab-button has-icon icon-only disable-hover" role="tab" id="tab-0-1" aria-controls="tabpanel-0-1"  [attr.aria-selected]="multiPlayerSelected">
       <ion-icon class="tab-button-icon ion-md-people" role="img" aria-label="people"></ion-icon>
       <ion-button-effect></ion-button-effect>
     </a>
@@ -28,35 +28,7 @@
 
 <ion-content>
 
-
-<!--
-   <ion-slides #mySlider (onStart)="testaus()" (ionDidChange)="onSlideChanged()" slider="slider" [options]="options">
-
-     <ion-slide class="top" *ngFor="let hole of availableHoles; let i = index">
-
-        <ion-item [hidden]="multiPlayerSelected">
-          <ion-label>Pallo taskuun</ion-label>
-          <ion-toggle [(ngModel)]="model.holes[hole.index].results.noResult"></ion-toggle>
-        </ion-item>
-
-        <section [hidden]="multiPlayerSelected" [hidden]="model.holes[hole.index].results.noResult">
-          <stroke-input primary="true" label="Lyönnit" [index]="hole.index" [total]="model.holes[hole.index].results.strokes"> </stroke-input>
-          <stroke-input label="Putit" [index]="hole.index" [total]="model.holes[hole.index].results.putts"> </stroke-input>
-          <stroke-input label="Hiekkalyönnit" [index]="hole.index" [total]="model.holes[hole.index].results.sands"> </stroke-input>
-          <stroke-input label="Rangaistukset" [index]="hole.index" [total]="model.holes[hole.index].results.penalties"> </stroke-input>
-        </section>
-
-        <section [hidden]="!multiPlayerSelected">
-          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[0].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[0].strokes"> </stroke-input>
-          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[1].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[1].strokes"> </stroke-input>
-          <stroke-input primary="true" label="{{model.holes[hole.index].multiplayers[2].name}}" multiplayer="true" [total]="model.holes[hole.index].multiplayers[2].strokes"> </stroke-input>
-        </section>
-
-     </ion-slide>
-
-   </ion-slides> -->
-
-   <div [hidden]="multiPlayerSelected" [hidden]="model.holes[0].results.noResult" class="carousel-wrap" pan>
+   <div class="carousel-wrap" pan>
 
      <hole id="floating-content-0"></hole>
      <hole id="floating-content-1"></hole>
@@ -68,8 +40,8 @@
 
 <ion-toolbar position="bottom">
   <ion-row class="stroke-input">
-    <ion-col col-33><button *ngIf="!isFirstHole" clear (click)="previous()"> <ion-icon name="arrow-back"> </ion-icon> </button> </ion-col>
+    <ion-col col-33><button *ngIf="holeService.getIndex() > 0" clear (click)="previous()"> <ion-icon name="arrow-back"> </ion-icon> </button> </ion-col>
     <ion-col col-33><button (click)="endRound()" *ngIf="isLastHole">Lopeta kierros</button></ion-col>
-    <ion-col col-33 class="text-right"><button *ngIf="!isLastHole" clear (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button></ion-col>
+    <ion-col col-33 class="text-right"><button *ngIf="holeService.getIndex() < holeService.getHoles().length-1" clear (click)="next()"><ion-icon name="arrow-forward"></ion-icon></button></ion-col>
   </ion-row>
 </ion-toolbar>

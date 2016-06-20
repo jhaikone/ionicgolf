@@ -1,79 +1,116 @@
 <div class="slide-content">
 
- <ion-grid>
-   <ion-row class="stroke-input">
+  <div [hidden]="holeService.getResult().multiplayerTab">
 
-     <ion-col width-40>Lyönnit</ion-col>
-     <ion-col end width-20 class="primary text-right">
-       <span>{{holeService.getResult().results.strokes.value}}</span>
-     </ion-col>
+       <ion-item>
+         <ion-label>Pallo taskuun</ion-label>
+         <ion-toggle [(ngModel)]="holeService.getResult().results.noResult"></ion-toggle>
+       </ion-item>
 
-     <ion-col width-40>
-       <ion-buttons end>
-         <button round (click)="decreaseStrokes()" type="button"><ion-icon name="remove"></ion-icon></button>
-         <button round (click)="increaseStrokes()"><ion-icon name="add"></ion-icon></button>
-       </ion-buttons>
-     </ion-col>
 
-   </ion-row>
+       <div [hidden]="holeService.getResult().results.noResult">
 
- </ion-grid>
+         <ion-grid>
 
- <ion-grid>
-   <ion-row class="stroke-input">
+          <ion-row class="stroke-input">
 
-     <ion-col width-40>Putit</ion-col>
-     <ion-col end width-20 class="secondary text-right">
-       <span>{{holeService.getResult().results.putts.value}}</span>
-     </ion-col>
+            <ion-col width-40>Lyönnit</ion-col>
+            <ion-col end width-20 class="primary text-right">
+              <span>{{holeService.getResult().results.strokes.value}}</span>
+            </ion-col>
 
-     <ion-col width-40>
-       <ion-buttons end>
-         <button round (click)="decrease('putts'); showInput = true" type="button"><ion-icon name="remove"></ion-icon></button>
-         <button round (click)="increase('putts')"><ion-icon name="add"></ion-icon></button>
-       </ion-buttons>
-     </ion-col>
+            <ion-col width-40>
+              <ion-buttons end>
+                <button round (click)="decreaseStrokes()" type="button"><ion-icon name="remove"></ion-icon></button>
+                <button round (click)="increaseStrokes()"><ion-icon name="add"></ion-icon></button>
+              </ion-buttons>
+            </ion-col>
 
-   </ion-row>
+          </ion-row>
 
- </ion-grid>
+        </ion-grid>
 
- <ion-grid>
-   <ion-row class="stroke-input">
+         <ion-grid>
+           <ion-row class="stroke-input">
 
-     <ion-col width-40>Hiekkalyönnit</ion-col>
-     <ion-col end width-20 class="secondary text-right">
-       <span>{{holeService.getResult().results.sands.value}}</span>
-     </ion-col>
+             <ion-col width-40>Putit</ion-col>
+             <ion-col end width-20 class="secondary text-right">
+               <span>{{holeService.getResult().results.putts.value}}</span>
+             </ion-col>
 
-     <ion-col width-40>
-       <ion-buttons end>
-         <button round (click)="decrease('sands')" type="button"><ion-icon name="remove"></ion-icon></button>
-         <button round (click)="increase('sands')"><ion-icon name="add"></ion-icon></button>
-       </ion-buttons>
-     </ion-col>
+             <ion-col width-40>
+               <ion-buttons end>
+                 <button round (click)="decrease('putts'); showInput = true" type="button"><ion-icon name="remove"></ion-icon></button>
+                 <button round (click)="increase('putts')"><ion-icon name="add"></ion-icon></button>
+               </ion-buttons>
+             </ion-col>
 
-   </ion-row>
+           </ion-row>
 
- </ion-grid>
+         </ion-grid>
 
- <ion-grid>
-   <ion-row class="stroke-input">
+         <ion-grid>
+           <ion-row class="stroke-input">
 
-     <ion-col width-40>Rangaistukset</ion-col>
-     <ion-col end width-20 class="secondary text-right">
-       <span>{{holeService.getResult().results.penalties.value}}</span>
-     </ion-col>
+             <ion-col width-40>Hiekkalyönnit</ion-col>
+             <ion-col end width-20 class="secondary text-right">
+               <span>{{holeService.getResult().results.sands.value}}</span>
+             </ion-col>
 
-     <ion-col width-40>
-       <ion-buttons end>
-         <button round (click)="decrease('penalties')" type="button"><ion-icon name="remove"></ion-icon></button>
-         <button round (click)="increase('penalties')"><ion-icon name="add"></ion-icon></button>
-       </ion-buttons>
-     </ion-col>
+             <ion-col width-40>
+               <ion-buttons end>
+                 <button round (click)="decrease('sands')" type="button"><ion-icon name="remove"></ion-icon></button>
+                 <button round (click)="increase('sands')"><ion-icon name="add"></ion-icon></button>
+               </ion-buttons>
+             </ion-col>
 
-   </ion-row>
+           </ion-row>
 
- </ion-grid>
+         </ion-grid>
+
+         <ion-grid>
+           <ion-row class="stroke-input">
+
+             <ion-col width-40>Rangaistukset</ion-col>
+             <ion-col end width-20 class="secondary text-right">
+               <span>{{holeService.getResult().results.penalties.value}}</span>
+             </ion-col>
+
+             <ion-col width-40>
+               <ion-buttons end>
+                 <button round (click)="decrease('penalties')" type="button"><ion-icon name="remove"></ion-icon></button>
+                 <button round (click)="increase('penalties')"><ion-icon name="add"></ion-icon></button>
+               </ion-buttons>
+             </ion-col>
+
+           </ion-row>
+
+         </ion-grid>
+
+       </div>
+
+  </div>
+
+    <div [hidden]="!holeService.getResult().multiplayerTab">
+      <ion-grid *ngFor="let multiplayer of holeService.getResult().multiplayers">
+
+       <ion-row class="stroke-input">
+
+         <ion-col width-40>{{multiplayer.name}}</ion-col>
+         <ion-col end width-20 class="primary text-right">
+           <span>{{multiplayer.strokes.value}}</span>
+         </ion-col>
+
+         <ion-col width-40>
+           <ion-buttons end>
+             <button round (click)="(multiplayer.strokes.value = multiplayer.strokes.value > 1 ? multiplayer.strokes.value-1 : multiplayer.strokes.value)" type="button"><ion-icon name="remove"></ion-icon></button>
+             <button round (click)="(multiplayer.strokes.value = multiplayer.strokes.value+1)"><ion-icon name="add"></ion-icon></button>
+           </ion-buttons>
+         </ion-col>
+
+       </ion-row>
+
+     </ion-grid>
+    </div>
 
 </div>

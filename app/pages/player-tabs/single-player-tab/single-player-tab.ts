@@ -55,46 +55,30 @@ export class SinglePlayerPage {
   }
 
 
-    private initCurrentIndex() {
-      this.holeService.setIndex(this.slider.activeIndex);
-    }
+  private initCurrentIndex() {
+    this.holeService.setIndex(this.slider.activeIndex);
+  }
 
-    showAchievements() {
-      let achievementsPage = Modal.create(AchievementsPage);
-      this.nav.present(achievementsPage);
-    }
+  showAchievements() {
+    let achievementsPage = Modal.create(AchievementsPage);
+    this.nav.present(achievementsPage);
+  }
 
-    next() {
-      this.isFirstHole = false;
-      this.slider.slideNext();
-      this.isLastHole = this.slider.isEnd;
-      this.initCurrentIndex();
-    }
+  next() {
+    this.holeService.setIndex(this.holeService.getIndex()+1);
+  }
 
-    previous() {
-      this.isLastHole = false;
-      this.slider.slidePrev();
-      this.initCurrentIndex();
-      this.isFirstHole = this.slider.isBeginning;
-    }
+  previous() {
+    this.holeService.setIndex(this.holeService.getIndex()-1);
+  }
 
-    onSlideChanged() {
-      this.initCurrentIndex();
-      this.isLastHole = this.slider.isEnd;
-      this.isFirstHole = this.slider.isBeginning;
-    }
+  getHole() {
+    return this.holeService.getIndex()+1;
+  }
 
-    testaus() {
-      console.log('gegegeg');
-    }
-
-    getHole() {
-      return this.holeService.getIndex()+1;
-    }
-
-    getPar() {
-      return this.holeService.getPar();
-    }
+  getPar() {
+    return this.holeService.getPar();
+  }
 
   getStyle() {
     let style = "transform: translate3d(0px ,0px, 0px) scaleX(50vw)";
@@ -109,12 +93,6 @@ export class SinglePlayerPage {
   endRound() {
     console.log('results', this.holeService.getResults());
     this.nav.push(InformationPage, {});
-  }
-
-  getObject(key) {
-    console.log(this.holeIndex);
-    if(this.holeIndex === -1) return {};
-    return this.model.holes[this.holeIndex].results[key];
   }
 
 }
