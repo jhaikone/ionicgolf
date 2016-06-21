@@ -2,11 +2,7 @@ import  { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 
 @Component({
-  template: `
-  <ion-content padding>
-    <h2>I'm a modal!</h2>
-    <button (click)="close()">Close</button>
-  </ion-content>`
+  templateUrl: 'build/pages/achievements/achievements-page.html'
 })
 
 export class AchievementsPage {
