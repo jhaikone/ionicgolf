@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 
 import { ionicBootstrap, Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
-import { SinglePlayerPage } from './pages/player-tabs/single-player-tab/single-player-tab'; 
+import { SinglePlayerPage } from './pages/player-tabs/single-player-tab/single-player-tab';
 import { InformationPage } from './pages/information/information-page';
 import { HoleService } from './components/services/hole-service/hole-service.component';
+import { TrophyService } from './components/services/trophy-service/trophy-service.component';
 
 
 @Component({
@@ -39,4 +40,4 @@ class MyApp {
 // Pass any providers for your app in the second argument
 // Set any config for your app as the third argument:
 // http://ionicframework.com/docs/v2/api/config/Config/
-ionicBootstrap(MyApp, [HoleService],{});
+ionicBootstrap(MyApp, [HoleService, TrophyService],{});

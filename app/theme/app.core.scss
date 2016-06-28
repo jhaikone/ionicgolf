@@ -11,6 +11,7 @@
 @import "../pages/information/information-page";
 @import "../pages/item-details/item-details";
 @import "../pages/achievements/achievements-page";
+@import "../pages/pages";
 
 @import "../components/directives/stroke-input/stroke-input.component";
 @import "../components/directives/hole/hole.component";
@@ -23,6 +24,21 @@
 
 scroll-content {
   overflow-y: auto;
+}
+
+.ion-no-result {
+  width: auto;
+  height: 20px;
+}
+
+.ion-ribbon-no-result::before {
+  content: url('../../img/no-result.png') !important;
+}
+.ion-ribbon-par::before {
+  content: url('../../img/par.png') !important;
+}
+.ion-ribbon-birdie::before {
+  content: url('../../img/birdie.png') !important;
 }
 
 // tabbar {

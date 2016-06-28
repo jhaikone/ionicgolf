@@ -5,6 +5,17 @@
   </ion-row>
 </ion-toolbar>
 
-<ion-content>
-  <span>content</span>
+<ion-content class="margin-top-large">
+
+  <ion-cards>
+
+  <ion-card *ngFor="let ribbon of trophyService.getRibbons()">
+    <ion-row center [ngClass]="{'disabled': !isDiscovered(ribbon)}">
+      <ion-col width-30><ion-icon class="{{ribbon.icon}}" role="img" aria-label="no-result"></ion-icon></ion-col>
+      <ion-col width-50> {{ribbon.label}}</ion-col>
+      <ion-col width-20 class="text-right"><span class="primary" [ngClass]="{'big':isBig(ribbon), 'avarage': (!isBig(ribbon))}">{{ribbon.amount}}</span></ion-col>
+    </ion-row>
+  </ion-card>
+</ion-cards>
+
 </ion-content>

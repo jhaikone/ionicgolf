@@ -1,0 +1,33 @@
+.golf-bottom-bar {
+  position: absolute;
+  bottom: 0;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.disabled {
+  opacity: 0.2;
+}
+
+.primary {
+  min-height: 57px;
+  color: color($colors, primary);
+
+  &.big {
+    font-size: color($fonts, big);
+  }
+
+  &.avarage {
+    font-size: color($fonts, avarage);
+  }
+
+  &.small {
+    font-size: color($fonts, small);
+  }
+}
+
+ion-page {
+  background: color($colors, background);
+}

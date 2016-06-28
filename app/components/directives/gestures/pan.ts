@@ -30,6 +30,7 @@ export class PanDirective implements OnInit, OnDestroy {
   isMoveStarted: boolean = false;
   holeService: any;
   listenFunc: any;
+  startPan: boolean = false;
 
   constructor(el: ElementRef, holeService: HoleService, public renderer: Renderer) {
     this.el = el.nativeElement;
@@ -39,7 +40,6 @@ export class PanDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.renderer.listen(this.el, 'transitionend', (event) => {
       if (event.propertyName === 'transform') {
         event.preventDefault();
@@ -55,19 +55,26 @@ export class PanDirective implements OnInit, OnDestroy {
         'stopPropagation': true,
         'preventDefault': true,
         'invokeApply': false,
-        'directions': "DIRECTION_HORIZONTAL"
+        'directions':"DIRECTION_HORIZONTAL"
       }
     );
 
     this.panGesture.listen();
 
     this.panGesture.on('panstart', event => {
-      this.renderer.setElementClass(this.el, 'animate', false);
+      if(Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+        this.startPan = false;
+      } else {
+        this.startPan = true;
+        this.renderer.setElementClass(this.el, 'animate', false);
+        this.direction = event.deltaX < 0 ? Direction.Next : Direction.Previous;
+      }
 
-      this.direction = event.deltaX < 0 ? Direction.Next : Direction.Previous;
     })
 
     this.panGesture.on('pan', event => {
+
+        if(!this.startPan) return;
         if(!this.isMoveStarted) {
           this.hideScrollY = true;
         }
@@ -82,7 +89,6 @@ export class PanDirective implements OnInit, OnDestroy {
     })
 
     this.panGesture.on('panend', event => {
-      this.renderer.setElementClass(this.el, 'animate', false);
       if(this.isOnEdge()) {
         this.snapPosition = 0;
       } else if (Math.abs(event.deltaX) > 100 || Math.abs(event.overallVelocityX) > 0.5) {
