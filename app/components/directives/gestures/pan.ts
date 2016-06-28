@@ -5,6 +5,7 @@ import {Page} from 'ionic-angular';
 
 import { HoleService } from '../../../components/services/hole-service/hole-service.component';
 
+declare var Hammer: any
 
 enum Direction {
   Next,
@@ -30,7 +31,7 @@ export class PanDirective implements OnInit, OnDestroy {
   isMoveStarted: boolean = false;
   holeService: any;
   listenFunc: any;
-  startPan: boolean = false;
+  panStarted: boolean = false;
 
   constructor(el: ElementRef, holeService: HoleService, public renderer: Renderer) {
     this.el = el.nativeElement;
@@ -48,33 +49,37 @@ export class PanDirective implements OnInit, OnDestroy {
       }
     });
 
-    this.panGesture = new Gesture(
-      this.el,
-      {
-        'type': "pan",
-        'stopPropagation': true,
-        'preventDefault': true,
-        'invokeApply': false,
-        'directions':"DIRECTION_HORIZONTAL"
-      }
-    );
+    let options = {
+      stopPropagation: true,
+      preventDefault: true,
+      invokeApply: false,
+      directions:"DIRECTION_HORIZONTAL"
+    }
+
+    this.panGesture = new Gesture(this.el, {
+      recognizers: [
+        [Hammer.Pan, options]
+      ]
+    });
 
     this.panGesture.listen();
 
     this.panGesture.on('panstart', event => {
-      if(Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-        this.startPan = false;
-      } else {
-        this.startPan = true;
+      console.log(event);
+      console.log('event', Math.abs(event.angle));
+      let angle = Math.abs(event.angle);
+      if(angle < 30 || angle > 160) {
+        this.panStarted = true;
         this.renderer.setElementClass(this.el, 'animate', false);
         this.direction = event.deltaX < 0 ? Direction.Next : Direction.Previous;
+      } else {
+          this.panStarted = false;
       }
-
     })
 
     this.panGesture.on('pan', event => {
 
-        if(!this.startPan) return;
+        if(!this.panStarted) return;
         if(!this.isMoveStarted) {
           this.hideScrollY = true;
         }
@@ -84,11 +89,10 @@ export class PanDirective implements OnInit, OnDestroy {
 
         this.renderer.setElementStyle(this.el, '-webkit-transform', 'translate3d(' + positionX + 'px,0px,0px)');
         this.renderer.setElementStyle(this.el, 'transform', 'translate3d(' + positionX + 'px,0px,0px)');
-
-
     })
 
     this.panGesture.on('panend', event => {
+      if(!this.panStarted) return;
       if(this.isOnEdge()) {
         this.snapPosition = 0;
       } else if (Math.abs(event.deltaX) > 100 || Math.abs(event.overallVelocityX) > 0.5) {
@@ -97,6 +101,7 @@ export class PanDirective implements OnInit, OnDestroy {
       } else {
         this.snapPosition = 0;
       }
+      this.panStarted = false;
       this.renderer.setElementClass(this.el, 'animate', true);
       this.renderer.setElementStyle(this.el, '-webkit-transform', 'translate3d(' + this.snapPosition + '%, 0, 0)');
     })

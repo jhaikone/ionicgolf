@@ -1,6 +1,6 @@
 <div class="slide-content">
 
-  <div [hidden]="holeService.getResult().multiplayerTab">
+  <section *ngIf="!holeService.getResult().multiplayerTab">
 
        <ion-item>
          <ion-label>Pallo taskuun</ion-label>
@@ -8,7 +8,7 @@
        </ion-item>
 
 
-       <div [hidden]="holeService.getResult().singlePlayer.noResult">
+       <section *ngIf="!holeService.getResult().singlePlayer.noResult">
 
          <ion-grid>
 
@@ -87,11 +87,11 @@
 
          </ion-grid>
 
-       </div>
+       </section>
 
-  </div>
+  </section>
 
-    <div [hidden]="!holeService.getResult().multiplayerTab">
+    <section *ngIf="holeService.getResult().multiplayerTab">
       <ion-grid *ngFor="let multiplayer of holeService.getResult().multiplayers">
 
        <ion-row class="stroke-input">
@@ -111,6 +111,6 @@
        </ion-row>
 
      </ion-grid>
-    </div>
+   </section>
 
 </div>

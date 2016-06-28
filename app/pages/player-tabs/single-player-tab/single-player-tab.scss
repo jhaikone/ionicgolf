@@ -46,7 +46,7 @@
 .carousel-wrap {
   position:absolute;
   background: white;
-  height: 100%;
+  height: auto;
   text-align: center;
   width: 100%;
 }
@@ -78,7 +78,7 @@
 }
 
 .menu-bar {
-  min-height: 55px;
+  height: 55px;
   color: color($colors, primary);
   font-size: color($fonts, avarage);
 }
@@ -117,4 +117,8 @@
     right: 0;
     bottom: 10px;
   }
+}
+
+.golf-bottom-bar {
+  height: 55px
 }
