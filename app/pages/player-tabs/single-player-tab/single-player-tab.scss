@@ -73,36 +73,6 @@
   padding: 10px;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.menu-bar {
-  height: 55px;
-  color: color($colors, primary);
-  font-size: color($fonts, avarage);
-}
-
-.toolbar-background {
-  background: color($colors, dark);
-}
-
-.toolbar-background {
-  background: color($colors, dark);
-}
-
-.no-background {
-  background: none;
-}
-
-.font-big {
-  font-size: map-get($fonts, 'big');
-}
-
-.font-avarage {
-  font-size: map-get($fonts, 'avarage');
-}
-
 .multiplayers {
   height: 75px;
   border-bottom: 1px solid black;
@@ -117,8 +87,4 @@
     right: 0;
     bottom: 10px;
   }
-}
-
-.golf-bottom-bar {
-  height: 55px
 }

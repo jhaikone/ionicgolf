@@ -1,6 +1,8 @@
 .golf-bottom-bar {
   position: absolute;
   bottom: 0;
+  height: 55px;
+  box-shadow: 0px -10px 40px -10px #656565;
 }
 
 .text-right {
@@ -30,4 +32,31 @@
 
 ion-page {
   background: color($colors, background);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.menu-bar {
+  height: 55px;
+  color: color($colors, primary);
+  font-size: color($fonts, avarage);
+  box-shadow: 0px 10px 40px -10px #656565;
+}
+
+.toolbar-background {
+  background: color($colors, dark);
+}
+
+.no-background {
+  background: none;
+}
+
+.font-big {
+  font-size: map-get($fonts, 'big');
+}
+
+.font-avarage {
+  font-size: map-get($fonts, 'avarage');
 }
