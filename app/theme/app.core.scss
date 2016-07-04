@@ -39,15 +39,40 @@ ion-page {
   height: 20px;
 }
 
+// medal icons
+
 .ion-ribbon-no-result::before {
-  content: url('../../img/no-result.png') !important;
+  content: url('../../img/ribbons/no-result.png') !important;
 }
 .ion-ribbon-par::before {
-  content: url('../../img/par.png') !important;
+  content: url('../../img/ribbons/par.png') !important;
 }
 .ion-ribbon-birdie::before {
-  content: url('../../img/birdie.png') !important;
+  content: url('../../img/ribbons/birdie.png') !important;
 }
+
+// ribbon icons
+
+.ion-medal-eagle::before {
+  content: url('../../img/medals/eagle.png') !important;
+}
+
+.ion-medal-ten-rounds::before {
+  content: url('../../img/medals/ten-rounds.png') !important;
+}
+
+.ion-medal-twenty-rounds::before {
+  content: url('../../img/medals/twenty-rounds.png') !important;
+}
+
+.ion-medal-fifty-rounds::before {
+  content: url('../../img/medals/fifty-rounds.png') !important;
+}
+
+.ion-medal-hundred-rounds::before {
+  content: url('../../img/medals/hundred-rounds.png') !important;
+}
+
 
 // tabbar {
 //   background: color($colors, dark);

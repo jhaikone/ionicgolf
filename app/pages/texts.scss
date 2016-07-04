@@ -1,5 +1,8 @@
+.ribbon-count {
+    min-height: 57px;
+}
+
 .primary {
-  min-height: 57px;
   color: color($colors, primary);
 
   &.big {

@@ -8,8 +8,11 @@ const TROPHY = {
     // {name: 'eagle', label: 'Merkkaa korttiin eagle tulos', icon: 'ion-ribbon-birdie', amount: 150}
   ],
   medals: [
-    {name: 'ten-rounds', label: 'Pelaa 10 kierrosta', icon: 'ion-no-result'},
-    {name: 'twenty-rounds', label: 'Pelaa 20 kierrosta', icon: 'ion-no-result'}
+    {name: 'ten-rounds', label: 'Pelaa 10 kierrosta', icon: 'ion-medal-ten-rounds', amount: 1, xp: 1000},
+    {name: 'ten-rounds', label: 'Pelaa 20 kierrosta', icon: 'ion-medal-twenty-rounds', amount: 1, xp: 2000},
+    {name: 'ten-rounds', label: 'Pelaa 50 kierrosta', icon: 'ion-medal-fifty-rounds', amount: 0, xp: 4000},
+    {name: 'ten-rounds', label: 'Pelaa 100 kierrosta', icon: 'ion-medal-hundred-rounds', amount: 0, xp: 10000},
+    {name: 'eagle', label: 'Saavuta 25 eaglea', icon: 'ion-medal-eagle', amount: 1, xp: 15000},
   ]
 }
 
