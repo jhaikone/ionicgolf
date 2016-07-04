@@ -5,39 +5,6 @@
   box-shadow: 0px -10px 40px -10px #656565;
 }
 
-.text-right {
-  text-align: right;
-}
-
-.disabled {
-  opacity: 0.2;
-}
-
-.primary {
-  min-height: 57px;
-  color: color($colors, primary);
-
-  &.big {
-    font-size: color($fonts, big);
-  }
-
-  &.avarage {
-    font-size: color($fonts, avarage);
-  }
-
-  &.small {
-    font-size: color($fonts, small);
-  }
-}
-
-ion-page {
-  background: color($colors, background);
-}
-
-.text-center {
-  text-align: center;
-}
-
 .menu-bar {
   height: 55px;
   color: color($colors, primary);
@@ -47,16 +14,4 @@ ion-page {
 
 .toolbar-background {
   background: color($colors, dark);
-}
-
-.no-background {
-  background: none;
-}
-
-.font-big {
-  font-size: map-get($fonts, 'big');
-}
-
-.font-avarage {
-  font-size: map-get($fonts, 'avarage');
 }

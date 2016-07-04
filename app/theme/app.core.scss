@@ -11,7 +11,11 @@
 @import "../pages/information/information-page";
 @import "../pages/item-details/item-details";
 @import "../pages/achievements/achievements-page";
+
 @import "../pages/pages";
+@import "../pages/layout";
+@import "../pages/texts";
+@import "../pages/buttons";
 
 @import "../components/directives/stroke-input/stroke-input.component";
 @import "../components/directives/hole/hole.component";
@@ -24,6 +28,10 @@
 
 scroll-content {
   overflow-y: auto;
+}
+
+ion-page {
+  background: color($colors, background);
 }
 
 .ion-no-result {

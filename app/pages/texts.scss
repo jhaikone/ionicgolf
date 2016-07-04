@@ -1,0 +1,24 @@
+.primary {
+  min-height: 57px;
+  color: color($colors, primary);
+
+  &.big {
+    font-size: color($fonts, big);
+  }
+
+  &.avarage {
+    font-size: color($fonts, avarage);
+  }
+
+  &.small {
+    font-size: color($fonts, small);
+  }
+}
+
+.font-big {
+  font-size: map-get($fonts, 'big');
+}
+
+.font-avarage {
+  font-size: map-get($fonts, 'avarage');
+}
