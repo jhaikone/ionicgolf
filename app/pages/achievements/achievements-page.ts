@@ -11,7 +11,7 @@ enum Tabs {
 }
 
 const MOCK_LEVEL = {
-  icon: 'ion-experience-5',
+  icon: 'ion-level-5',
   value: 3
 };
 
