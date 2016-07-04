@@ -45,7 +45,7 @@ export class PanDirective implements OnInit, OnDestroy {
       if (event.propertyName === 'transform') {
         event.preventDefault();
         this.renderer.setElementStyle(this.el, '-webkit-transform', 'translate3d(0, 0, 0)');
-        this.renderer.setElementClass(this.el, 'animate', false);
+        this.renderer.setElementClass(this.el, 'animate-swipe', false);
       }
     });
 
@@ -70,7 +70,7 @@ export class PanDirective implements OnInit, OnDestroy {
       let angle = Math.abs(event.angle);
       if(angle < 30 || angle > 160) {
         this.panStarted = true;
-        this.renderer.setElementClass(this.el, 'animate', false);
+        this.renderer.setElementClass(this.el, 'animate-swipe', false);
         this.direction = event.deltaX < 0 ? Direction.Next : Direction.Previous;
       } else {
           this.panStarted = false;
@@ -102,7 +102,7 @@ export class PanDirective implements OnInit, OnDestroy {
         this.snapPosition = 0;
       }
       this.panStarted = false;
-      this.renderer.setElementClass(this.el, 'animate', true);
+      this.renderer.setElementClass(this.el, 'animate-swipe', true);
       this.renderer.setElementStyle(this.el, '-webkit-transform', 'translate3d(' + this.snapPosition + '%, 0, 0)');
     })
 
@@ -122,7 +122,7 @@ export class PanDirective implements OnInit, OnDestroy {
     this.snapPosition = this.calculateSnapPosition();
     this.updateHoleIndex();
 
-    this.renderer.setElementClass(this.el, 'animate', true);
+    this.renderer.setElementClass(this.el, 'animate-swipe', true);
     this.renderer.setElementStyle(this.el, '-webkit-transform', 'translate3d(' + this.snapPosition + '%, 0, 0)');
   }
 

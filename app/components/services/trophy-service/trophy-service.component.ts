@@ -16,6 +16,28 @@ const TROPHY = {
   ]
 }
 
+const EXPERIENCE = {
+  levelCaps: [
+    { level:1, cap: 100, toNext: 150 },
+    { level:2, cap: 150, toNext: 200 },
+    { level:3, cap: 200, toNext: 250 },
+    { level:4, cap: 250, toNext: 300 },
+    // { level:5, cap: 300, toNext: 150 },
+    // { level:6, cap: 375, toNext: 150 },
+    // { level:7, cap: 450, toNext: 150 },
+    // { level:8, cap: 525, toNext: 150 },
+    // { level:9, cap: 650, toNext: 150 },
+    // { level:10, cap: 800, toNext: 150 }
+
+],
+  icon: {
+    5: 'ion-level-5',
+    10: 'ion-level-10',
+    15: 'ion-level-15',
+    20: 'ion-level-20'
+  }
+}
+
 @Injectable()
 export class TrophyService {
 
@@ -29,6 +51,17 @@ export class TrophyService {
 
   getMedals() {
     return TROPHY.medals;
+  }
+
+  getLevel(xp) {
+    for (let i = 0; i < EXPERIENCE.levelCaps.length; i++) {
+      if(xp < EXPERIENCE.levelCaps[0].cap) {
+        return EXPERIENCE.levelCaps[0];
+      }
+      if(xp >= EXPERIENCE.levelCaps[i].cap && xp < EXPERIENCE.levelCaps[i+1].cap) {
+        return EXPERIENCE.levelCaps[i];
+      }
+    }
   }
 
 }

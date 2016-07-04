@@ -16,6 +16,7 @@
 @import "../pages/layout";
 @import "../pages/texts";
 @import "../pages/buttons";
+@import "../pages/animate";
 
 @import "../components/directives/stroke-input/stroke-input.component";
 @import "../components/directives/hole/hole.component";
@@ -71,6 +72,16 @@ ion-page {
 
 .ion-medal-hundred-rounds::before {
   content: url('../../img/medals/hundred-rounds.png') !important;
+}
+
+// level icons
+
+.ion-level-5::before {
+  content: url('../../img/levels/5.png') !important;
+}
+
+.ion-level-10::before {
+  content: url('../../img/levels/10.png') !important;
 }
 
 
