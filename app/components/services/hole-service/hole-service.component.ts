@@ -237,6 +237,9 @@ export class HoleService {
           sands: {value: 0, key: 'sands'},
           penalties: {value: 0, key: 'penalties'},
           drive: {value: 1, key: 'drive'},
+          fairway: true,
+          gir: false,
+          sandSave: false,
         },
         multiplayers: []
       };
@@ -312,7 +315,8 @@ export class HoleService {
           bogey: {amount: 0, holes: []},
           doubleBogey: {amount: 0, holes: []},
           tripleBogey: {amount: 0, holes: []},
-          rest: {amount: 0, holes: []}
+          rest: {amount: 0, holes: []},
+          noResults: {amount: 0, holes: []}
         }
 
       },
@@ -347,6 +351,12 @@ export class HoleService {
   }
 
   private updateStatistics(statistics, hole, holeIndex) {
+    if (hole.singlePlayer.noResult) {
+      statistics.noResults.amount = statistics.noResults.amount+1;
+      statistics.noResults.holes.push(holeIndex);
+      return;
+    }
+
     let par = this.getParAt(holeIndex)
 
     switch(hole.singlePlayer.strokes.value - par) {

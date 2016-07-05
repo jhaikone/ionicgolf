@@ -10,6 +10,11 @@
 
        <section *ngIf="!holeService.getResult().singlePlayer.noResult">
 
+         <ion-item>
+           <ion-label>Avaus väylällä</ion-label>
+           <ion-toggle [(ngModel)]="holeService.getResult().singlePlayer.fairway"></ion-toggle>
+         </ion-item>
+
          <ion-grid class="primary-strokes">
 
           <ion-row class="stroke-input">
@@ -86,6 +91,16 @@
            </ion-row>
 
          </ion-grid>
+
+         <ion-item>
+           <ion-label>GiR-osuma</ion-label>
+           <ion-toggle [(ngModel)]="holeService.getResult().singlePlayer.gir"></ion-toggle>
+         </ion-item>
+
+         <ion-item>
+           <ion-label>Hiekkapelastus</ion-label>
+           <ion-toggle [(ngModel)]="holeService.getResult().singlePlayer.sandSave"></ion-toggle>
+         </ion-item>
 
        </section>
 

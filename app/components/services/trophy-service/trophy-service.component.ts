@@ -2,9 +2,9 @@ import  { Injectable } from '@angular/core';
 
 const TROPHY = {
   ribbons: [
-    {name: 'no-result', label: 'Merkkaa korttiin yli tripla bogey', icon: 'ion-ribbon-no-result', amount: 102, xp: 25},
-    {name: 'par', label: 'Merkkaa korttiin par tulos', icon: 'ion-ribbon-par', amount: 0, xp: 50},
-    {name: 'birdie', label: 'Merkkaa korttiin birdie tulos', icon: 'ion-ribbon-birdie', amount: 75},
+    {id: 1, name: 'no-result', label: 'Merkkaa korttiin yli tripla bogey', icon: 'ion-ribbon-no-result', amount: 102, xp: 25},
+    {id: 2, name: 'par', label: 'Merkkaa korttiin par tulos', icon: 'ion-ribbon-par', amount: 0, xp: 50},
+    {id: 3, name: 'birdie', label: 'Merkkaa korttiin birdie tulos', icon: 'ion-ribbon-birdie', amount: 75},
     // {name: 'eagle', label: 'Merkkaa korttiin eagle tulos', icon: 'ion-ribbon-birdie', amount: 150}
   ],
   medals: [
@@ -41,10 +41,6 @@ const EXPERIENCE = {
 @Injectable()
 export class TrophyService {
 
-  constructor() {
-
-  }
-
   getRibbons() {
     return TROPHY.ribbons;
   }
@@ -62,6 +58,32 @@ export class TrophyService {
         return EXPERIENCE.levelCaps[i];
       }
     }
+  }
+
+  getTrophies(information) {
+    let trophies = {
+      ribbons: [],
+      medals: []
+    }
+
+    console.log('info', information);
+    console.log('stati', information.statistics)
+
+    TROPHY.ribbons.forEach((ribbon) => {
+      switch(ribbon.name) {
+        case 'no-result':
+          if(this.hasNoResults(information.player.statistics.noResults)) {
+            trophies.ribbons.push(ribbon);
+          }
+          break;
+      }
+    });
+    console.log('trophies', trophies);
+    return trophies;
+  }
+
+  private hasNoResults(noResults) {
+    return noResults.amount > 0;
   }
 
 }
