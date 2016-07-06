@@ -7,42 +7,70 @@ import { TrophyService } from '../trophy-service/trophy-service.component';
 @Injectable()
 export class StorageService {
 
-  ribbons: Storage = null;
+
   trophyService: any;
 
+  storage: Storage = null;
+  medals: Storage = null;
+
   constructor(trophyService: TrophyService) {
-    console.log('at cons');
     this.trophyService = trophyService;
-    this.ribbons = new Storage(SqlStorage);
-    this.ribbons.query('CREATE TABLE IF NOT EXISTS Ribbons (Id INTEGER PRIMARY KEY, Total INTEGER)').then((response) => {
-      console.log('table created');
+
+    this.storage = new Storage(SqlStorage);
+    this.storage.query('CREATE TABLE IF NOT EXISTS Ribbons (Id INTEGER PRIMARY KEY, Total INTEGER)').then((response) => {
       this.initRibbons();
+    });
+
+    this.storage.query('CREATE TABLE IF NOT EXISTS Medals (Id INTEGER PRIMARY KEY, Total INTEGER, RibbonId INTEGER, RibbonCap INTEGER)').then((response) => {
+      this.initMedals();
+    });
+
+  }
+
+  //Update Ribbon Total according trophies for Ribbons table
+  setTrophies(trophies) {
+    trophies.storage.forEach((ribbon) => {
+      let sql = 'UPDATE Ribbons SET Total = Total+1 WHERE Id = \"' + ribbon.id + '\"';
+      console.log('setting sql', sql);
+      this.storage.query(sql).then((response) => {
+        console.log('inserted', response);
+      });
     });
   }
 
-  setTrophies(trophies) {
-    trophies.ribbons.forEach((ribbon) => {
-      let sql = 'UPDATE Ribbons SET Total = Total+1 WHERE Id = \"' + ribbon.id + '\"';
-      console.log('setting sql', sql);
-      this.ribbons.query(sql);
-    })
-    return this.ribbons.query('SELECT * FROM ribbons').then((response) => {
-      console.log('res', response);
-    })
-  }
-
-  // Get ribbon of our DB
+  // Get ribbon from our Ribbons table
   getRibbon(ribbon) {
-    let sql = 'SELECT FROM ribbons WHERE Id = \"' + ribbon.id + '\"';
-    return this.ribbons.query(sql);
+    let sql = 'SELECT FROM Ribbons WHERE Id = \"' + ribbon.id + '\"';
+    return this.storage.query(sql);
   }
 
-  initRibbons() {
+  // Get all ribbons from our Ribbons table
+  getRibbons() {
+    let sql = 'SELECT * FROM Ribbons';
+    return this.storage.query(sql);
+  }
+
+  // Get all medals from our Medals table
+  getMedals() {
+    let sql = 'SELECT * FROM Medals';
+    return this.storage.query(sql);
+  }
+
+  //Set all ribbons to our Ribbons table and set Total count to 0
+  private initRibbons() {
+    let sql = 'INSERT OR IGNORE INTO Ribbons (Id, Total) VALUES (?,?)';
     this.trophyService.getRibbons().forEach((ribbon)=> {
-      console.log('inserting', ribbon);
-      let sql = 'INSERT OR IGNORE INTO ribbons (Id, Total) VALUES (?,?)';
-      this.ribbons.query(sql, [ribbon.id, 0]);
-    })
+      this.storage.query(sql, [ribbon.id, 0]);
+    });
+  }
+
+  //Set all medals to our Medals table and set Total count to 0
+  private initMedals() {
+    let sql = 'INSERT OR IGNORE INTO Medals (Id, Total, RibbonId, RibbonCap) VALUES (?,?,?,?)';
+    this.trophyService.getMedals().forEach((medal) => {
+      console.log('medal', medal);
+      this.storage.query(sql, [medal.id, 0, medal.ribbonId, medal.ribbonCap]);
+    });
   }
 
 }

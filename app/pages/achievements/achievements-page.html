@@ -41,10 +41,10 @@
   <ion-cards *ngIf="tab === 1">
 
   <ion-card *ngFor="let ribbon of trophyService.getRibbons()">
-    <ion-row center [ngClass]="{'disabled': !isDiscovered(ribbon)}">
+    <ion-row center [ngClass]="{'disabled': !isRibbonDiscovered(ribbon)}">
       <ion-col width-30><ion-icon class="{{ribbon.icon}}" role="img" aria-label="{{ribbon.icon}}"></ion-icon></ion-col>
       <ion-col width-50> {{ribbon.label}}</ion-col>
-      <ion-col width-20 class="text-right"><span class="primary ribbon-count" [ngClass]="{'big':isBig(ribbon), 'avarage': (!isBig(ribbon))}">{{ribbon.amount}}</span></ion-col>
+      <ion-col width-20 class="text-right"><span class="primary ribbon-count" [ngClass]="{'big':isBig(ribbon), 'avarage': (!isBig(ribbon))}">{{getRibbonCount(ribbon)}}</span></ion-col>
     </ion-row>
   </ion-card>
 </ion-cards>
@@ -52,7 +52,7 @@
 <ion-cards *ngIf="tab === 2">
 
 <ion-card *ngFor="let medal of trophyService.getMedals()">
-  <ion-row center [ngClass]="{'disabled': !isDiscovered(medal)}">
+  <ion-row center [ngClass]="{'disabled': !isMedalDiscovered(medal)}">
     <ion-col width-30><ion-icon class="{{medal.icon}}" role="img" aria-label="no-result"></ion-icon></ion-col>
     <ion-col width-50> {{medal.label}}</ion-col>
     <ion-col width-20 class="text-right"><ion-icon class="font-big primary" name="{{hasMedal(medal)}}"></ion-icon></ion-col>

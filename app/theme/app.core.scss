@@ -58,6 +58,10 @@ ion-page {
   content: url('../../img/medals/eagle.png') !important;
 }
 
+.ion-medal-no-results::before {
+  content: url('../../img/medals/no-results.png') !important;
+}
+
 .ion-medal-ten-rounds::before {
   content: url('../../img/medals/ten-rounds.png') !important;
 }

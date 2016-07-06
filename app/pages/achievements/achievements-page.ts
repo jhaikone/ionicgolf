@@ -3,6 +3,7 @@ import  { Component, OnInit } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 
 import { TrophyService } from '../../components/services/trophy-service/trophy-service.component';
+import { StorageService } from '../../components/services/storage-service/storage-service.component';
 
 enum Tabs {
   Xp,
@@ -23,15 +24,28 @@ const MOCK_EXPERIENCE = 124;
 
 export class AchievementsPage implements OnInit {
 
-  tab: number = 0;
+
   trophyService: TrophyService;
+  storageService: StorageService;
+
+  tab: number = 0;
   tabs = Tabs;
   width: String = '0';
   experience: any = 0;
+  ribbons: any = [];
+  medals: any = [];
 
-  constructor (private viewCtrl: ViewController, trophyService: TrophyService) {
+  constructor (private viewCtrl: ViewController, trophyService: TrophyService, storageService: StorageService) {
     this.trophyService = trophyService;
-    console.log('tr', this.trophyService);
+    this.storageService = storageService;
+
+    this.storageService.getRibbons().then((response) => {
+      this.ribbons = Array.from(response.res.rows);
+    });
+
+    this.storageService.getMedals().then((response) => {
+      this.medals = Array.from(response.res.rows);
+    });
   }
 
   ionViewDidEnter() {
@@ -48,20 +62,37 @@ export class AchievementsPage implements OnInit {
   }
 
   isBig(ribbon) {
-    return ribbon.amount < 10
+    let userRibbon = this.findInList(this.ribbons, 'Id', ribbon.id);
+    return userRibbon ? userRibbon.Total < 10 : false;
   }
 
-  isDiscovered(ribbon) {
-    return ribbon.amount > 0;
+  private findInList(list, key, id) {
+    return list.find((object) => {
+      return object[key] === id;
+    })
+  }
+
+  isRibbonDiscovered(ribbon) {
+    let userRibbon = this.findInList(this.ribbons, 'Id', ribbon.id);
+    return userRibbon ? userRibbon.Total > 0 : false;
+  }
+
+  isMedalDiscovered(medal) {
+    let userMedal = this.findInList(this.medals, 'Id', medal.id);
+    return userMedal ? userMedal.Total > 0 : false;
+  }
+
+  getRibbonCount(ribbon) {
+    let userRibbon = this.findInList(this.ribbons, 'Id', ribbon.id);
+    return userRibbon ? userRibbon.Total : 0;
   }
 
   hasMedal(medal) {
-    return medal.amount > 0 ? 'checkmark' : 'remove';
+    let userMedal = this.findInList(this.medals, 'Id', medal.id);
+    return userMedal && userMedal.total > 0 ? 'checkmark' : 'remove';
   }
 
   activeTab(tab) {
-    console.log('tab', tab)
-    this.width = '70';
     this.tab = tab;
   }
 

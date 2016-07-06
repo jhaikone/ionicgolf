@@ -2,17 +2,18 @@ import  { Injectable } from '@angular/core';
 
 const TROPHY = {
   ribbons: [
-    {id: 1, name: 'no-result', label: 'Merkkaa korttiin yli tripla bogey', icon: 'ion-ribbon-no-result', amount: 102, xp: 25},
-    {id: 2, name: 'par', label: 'Merkkaa korttiin par tulos', icon: 'ion-ribbon-par', amount: 0, xp: 50},
-    {id: 3, name: 'birdie', label: 'Merkkaa korttiin birdie tulos', icon: 'ion-ribbon-birdie', amount: 75},
-    // {name: 'eagle', label: 'Merkkaa korttiin eagle tulos', icon: 'ion-ribbon-birdie', amount: 150}
+    { id: 1, key: 'noResults', mame: 'Tumpelo', label: 'Merkkaa korttiin yli tripla bogey', icon: 'ion-ribbon-no-result', xp: 25 },
+    { id: 2, key: 'par', mame: 'Parittaja', label: 'Merkkaa korttiin par tulos', icon: 'ion-ribbon-par', xp: 50 },
+    { id: 3, key: 'birdie', mame: 'Pirkottaja', label: 'Merkkaa korttiin birdie tulos', icon: 'ion-ribbon-birdie', xp: 75 },
+    // {name: 'eagle', label: 'Merkkaa korttiin eagle tulos', icon: 'ion-ribbon-birdie',: 150}
   ],
   medals: [
-    {name: 'ten-rounds', label: 'Pelaa 10 kierrosta', icon: 'ion-medal-ten-rounds', amount: 1, xp: 1000},
-    {name: 'ten-rounds', label: 'Pelaa 20 kierrosta', icon: 'ion-medal-twenty-rounds', amount: 1, xp: 2000},
-    {name: 'ten-rounds', label: 'Pelaa 50 kierrosta', icon: 'ion-medal-fifty-rounds', amount: 0, xp: 4000},
-    {name: 'ten-rounds', label: 'Pelaa 100 kierrosta', icon: 'ion-medal-hundred-rounds', amount: 0, xp: 10000},
-    {name: 'eagle', label: 'Saavuta 25 eaglea', icon: 'ion-medal-eagle', amount: 1, xp: 15000},
+    // { name: 'ten-rounds', label: 'Pelaa 10 kierrosta', icon: 'ion-medal-ten-rounds', xp: 1000,ribbonId: 1 },
+    // { name: 'ten-rounds', label: 'Pelaa 20 kierrosta', icon: 'ion-medal-twenty-rounds', xp: 2000,ribbonId: 1 },
+    // { name: 'ten-rounds', label: 'Pelaa 50 kierrosta', icon: 'ion-medal-fifty-rounds', xp: 4000,ribbonId: 1 },
+    // { name: 'ten-rounds', label: 'Pelaa 100 kierrosta', icon: 'ion-medal-hundred-rounds', xp: 10000,ribbonId: 1 },
+    // { name: 'eagle', label: 'Saavuta 25 eaglea', icon: 'ion-medal-eagle', xp: 15000,ribbonId: 1 },
+    { id: 1, name: 'noResults', label: 'Saavuta 25 Tumpero-nauhaa', icon: 'ion-medal-no-results', xp: 15000, ribbonId: 1, ribbonCap: 25 }
   ]
 }
 
@@ -70,20 +71,16 @@ export class TrophyService {
     console.log('stati', information.statistics)
 
     TROPHY.ribbons.forEach((ribbon) => {
-      switch(ribbon.name) {
-        case 'no-result':
-          if(this.hasNoResults(information.player.statistics.noResults)) {
-            trophies.ribbons.push(ribbon);
-          }
-          break;
+      if(this.hasRibbon(information.player.statistics[ribbon.key])) {
+        trophies.ribbons.push(ribbon);
       }
     });
     console.log('trophies', trophies);
     return trophies;
   }
 
-  private hasNoResults(noResults) {
-    return noResults.amount > 0;
+  private hasRibbon(stat) {
+    return stat.amount > 0;
   }
 
 }
