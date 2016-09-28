@@ -301,22 +301,26 @@ export class HoleService {
     return this.holes[index].par;
   }
 
+  private createScoreObject() {
+    return {amount: 0, holes: []};
+  }
+
 
   getInformation() {
 
     let information = {
       player: {
-        name: 'Juuso', score: 0, putts: 0, penalties: 0, sands: 0, statistics: {
-          holeInOne: {amount: 0, holes: []},
-          albatross: {amount: 0, holes: []},
-          eagle: {amount: 0, holes: []},
-          birdie: {amount: 0, holes: []},
-          par: {amount: 0, holes: []},
-          bogey: {amount: 0, holes: []},
-          doubleBogey: {amount: 0, holes: []},
-          tripleBogey: {amount: 0, holes: []},
-          rest: {amount: 0, holes: []},
-          noResults: {amount: 0, holes: []}
+        name: 'Juuso', backNine: 0, frontNine: 0, score: 0, putts: 0, penalties: 0, sands: 0, statistics: {
+          holeInOne: this.createScoreObject(),
+          albatross: this.createScoreObject(),
+          eagle: this.createScoreObject(),
+          birdie: this.createScoreObject(),
+          par: this.createScoreObject(),
+          bogey: this.createScoreObject(),
+          doubleBogey: this.createScoreObject(),
+          tripleBogey: this.createScoreObject(),
+          rest: this.createScoreObject(),
+          noResults: this.createScoreObject()
         }
 
       },
@@ -337,7 +341,7 @@ export class HoleService {
       information.player.sands = information.player.sands + hole.singlePlayer.sands.value;
       information.player.penalties = information.player.penalties + hole.singlePlayer.penalties.value;
 
-      this.updateStatistics(statistics, hole, holeIndex);
+      this.updateStatistics(information, statistics, hole, holeIndex);
 
       holeIndex++;
 
@@ -350,11 +354,17 @@ export class HoleService {
     return information;
   }
 
-  private updateStatistics(statistics, hole, holeIndex) {
+  private updateStatistics(information, statistics, hole, holeIndex) {
     if (hole.singlePlayer.noResult) {
       statistics.noResults.amount = statistics.noResults.amount+1;
       statistics.noResults.holes.push(holeIndex);
       return;
+    }
+
+    if (holeIndex < 9) {
+      information.player.frontNine = information.player.frontNine + hole.singlePlayer.strokes.value;
+    } else {
+      information.player.backNine = information.player.backNine + hole.singlePlayer.strokes.value;
     }
 
     let par = this.getParAt(holeIndex)
@@ -366,7 +376,7 @@ export class HoleService {
         break;
       }
       case -3: {
-        if(par === 4) {
+        if (par === 4) {
           statistics.holeInOne.amount = statistics.holeInOne.amount+1;
           statistics.holeInOne.holes.push(holeIndex);
         } else {
@@ -376,7 +386,7 @@ export class HoleService {
         break;
       }
       case -2: {
-        if(par === 3) {
+        if (par === 3) {
           statistics.holeInOne.amount = statistics.holeInOne.amount+1;
           statistics.holeInOne.holes.push(holeIndex);
         } else {
@@ -427,7 +437,7 @@ export class HoleService {
    let penalties = {key: 'penalties', value: 0};
    let drive = {key: 'drive', value: 1};
 
-   totalPlayers.forEach( (player)=> {
+   totalPlayers.forEach( (player) => {
      objectPlayers.push({name: player.name, id: player.id, strokes, putts, sands, penalties, drive, noResult: false});
    })
 

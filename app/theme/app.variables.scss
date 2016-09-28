@@ -44,13 +44,17 @@ $colors: (
   dark:       #313131,
   favorite:   #69BB7B,
   background: #fff,
-  extra-light: #e2e2e2
+  extra-light: #e2e2e2,
+  tab: #f3f3f3
 );
 
 $fonts: (
+  extra-big: 100px,
   big: 40px,
   moderate: 30px,
-  avarage: 22px
+  avarage: 22px,
+  small: 16px,
+  xsmall: 12px,
 );
 
 $text-color: #656565 !default;

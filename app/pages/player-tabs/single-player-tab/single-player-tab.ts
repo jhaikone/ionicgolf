@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { NavController, Modal } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import { StrokeInputComponent } from '../../../components/directives/stroke-input/stroke-input.component';
 import { HoleComponent } from '../../../components/directives/hole/hole.component';
@@ -31,18 +31,19 @@ export class SinglePlayerPage {
   result: any;
   holes: any;
 
-  constructor(holeService: HoleService, nav: NavController) {
+  constructor(holeService: HoleService, nav: NavController, public modalController: ModalController) {
     this.nav = nav;
     this.holeService = holeService;
-
+    this.modalController = modalController;
+    console.log('mod', ModalController);
     this.holes = this.holeService.getHoles();
     this.model = this.holeService.getResults();
     this.holeIndex = this.holeService.getIndex();
   }
 
   showAchievements() {
-    let achievementsPage = Modal.create(AchievementsPage);
-    this.nav.present(achievementsPage);
+    let modal = this.modalController.create(AchievementsPage);
+    modal.present();
   }
 
   next() {

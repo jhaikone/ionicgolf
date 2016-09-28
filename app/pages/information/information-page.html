@@ -1,4 +1,5 @@
 <ion-content>
+
   <ion-toolbar class="menu-bar" position="top">
     <ion-row class="stroke-input">
       <ion-col class="text-center" width-100><span>Tulokset</span></ion-col>
@@ -9,79 +10,54 @@
       <ion-card-content>
         <ion-card-title><span></span></ion-card-title>
 
-        <ion-card-title padding-vertical>
-          <ion-grid>
-            <ion-row>
-              <ion-col width-50><h1><span>{{player.name}}</span></h1></ion-col>
-              <ion-col width-50 class="relative" text-center>
-                <div class="absolute right bottom">
-                  <div class="rounded">
-                    <h1 primary>{{player.score}}</h1>
-                  </div>
-                </div>
-                </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-title>
+        <ion-card-title text-center> <span light>Tulos</span> </ion-card-title>
 
-        <ion-grid>
-          <ion-row relative>
+          <section class="border-bottom">
 
-              <ion-col width-33 text-center class="relative">
-                <div class="absolute left">
-                  <div class="rounded">
-                    <h1 text-center secondary>{{player.putts}}</h1>
-                  </div>
-                  <h2 padding-top>Putit</h2>
-                </div>
-              </ion-col>
+            <div text-center><span primary class="score font-extra-big">{{player.score}}</span></div>
 
-              <ion-col width-33 text-center>
-                <div>
-                <div class="rounded">
-                  <h1 text-center secondary>{{player.sands}}</h1>
-                </div>
-                <h2 padding-top>Hiekka</h2>
-                </div>
-              </ion-col>
+          </section>
 
-              <ion-col width-33 class="relative">
-                <div class="absolute right">
-                  <div class="rounded">
-                    <h1 text-center secondary>{{player.penalties}}</h1>
-                  </div>
-                  <h2 padding-top text-center>+1</h2>
-                </div>
-              </ion-col>
+          <ion-row>
+
+            <ion-col width-50 text-center class="border-right">
+              <div><span class="font-xsmall" light>Etuysi</span></div>
+              <div><span primary>{{player.frontNine}}</span></div>
+            </ion-col>
+
+            <ion-col width-50 text-center>
+              <div><span class="font-xsmall" light>Takaysi</span></div>
+              <div><span primary>{{player.backNine}}</span></div>
+            </ion-col>
 
           </ion-row>
-      </ion-grid>
 
     </ion-card-content>
   </ion-card>
 
+  <ion-buttons text-center>
+    <button outline primary>Tuloskortti</button>
+  </ion-buttons>
 
   <ion-card>
-    <ion-card-content *ngFor="let friend of friends">
+    <ion-card-content class="font-small">
+      <ion-card-title text-center> <span light>Ennätykset</span> </ion-card-title>
+      <ion-row class="border-bottom">
+        <ion-col width-50><span light>Tulos</span></ion-col>
+        <ion-col width-50 text-right><span primary>72</span></ion-col>
+      </ion-row>
 
-      <ion-card-title>
+      <ion-row class="border-bottom">
+        <ion-col width-50><span light>Etuysi</span></ion-col>
+        <ion-col width-50 text-right><span primary>35</span></ion-col>
+      </ion-row>
 
-        <ion-grid>
-          <ion-row>
-            <ion-col width-50><h1>{{friend.name}}</h1></ion-col>
-            <ion-col width-50 class="relative">
-              <div class="absolute right bottom">
-                <div class="rounded">
-                  <h1 primary>{{friend.score}}</h1>
-              </div>
-            </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+      <ion-row class="border-bottom">
+        <ion-col width-50><span light>Takaysi</span></ion-col>
+        <ion-col width-50 text-right><span primary>37</span></ion-col>
+      </ion-row>
 
-      </ion-card-title>
-
-    </ion-card-content>
-  </ion-card>
+  </ion-card-content>
+</ion-card>
 
 </ion-content>

@@ -29,7 +29,7 @@ export class StorageService {
 
   //Update Ribbon Total according trophies for Ribbons table
   setTrophies(trophies) {
-    trophies.storage.forEach((ribbon) => {
+    trophies.ribbons.forEach((ribbon) => {
       let sql = 'UPDATE Ribbons SET Total = Total+1 WHERE Id = \"' + ribbon.id + '\"';
       console.log('setting sql', sql);
       this.storage.query(sql).then((response) => {
@@ -69,7 +69,7 @@ export class StorageService {
     let sql = 'INSERT OR IGNORE INTO Medals (Id, Total, RibbonId, RibbonCap) VALUES (?,?,?,?)';
     this.trophyService.getMedals().forEach((medal) => {
       console.log('medal', medal);
-      this.storage.query(sql, [medal.id, 0, medal.ribbonId, medal.ribbonCap]);
+      this.storage.query(sql, [medal.id, 0, medal.ribbon.id, medal.ribbon.cap]);
     });
   }
 

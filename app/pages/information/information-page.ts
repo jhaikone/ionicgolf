@@ -19,6 +19,7 @@ export class InformationPage  {
     storageService.setTrophies(trophyService.getTrophies(this.information));
     this.friends = this.information.friends;
     this.player = this.information.player;
+    console.log('this.infor', this.information)
   }
 
 
