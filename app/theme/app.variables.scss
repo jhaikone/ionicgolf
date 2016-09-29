@@ -40,6 +40,7 @@ $colors: (
   primary:    #94BB69,
   secondary:  #b3b132,
   danger:     #f53d3d,
+  light-danger: #ffb5a6,
   light:      #a7a7a7,
   dark:       #313131,
   favorite:   #69BB7B,
@@ -55,6 +56,10 @@ $fonts: (
   avarage: 22px,
   small: 16px,
   xsmall: 12px,
+);
+
+$sizes: (
+  menu-height: 55px,
 );
 
 $text-color: #656565 !default;

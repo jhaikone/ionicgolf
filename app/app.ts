@@ -16,8 +16,8 @@ import { StorageService } from './components/services/storage-service/storage-se
 
 class MyApp {
 
+  // rootPage: any = SinglePlayerPage;
   rootPage: any = InformationPage;
-  // rootPage: any = InformationPage;
 
   constructor(
     private platform: Platform,

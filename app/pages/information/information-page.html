@@ -1,16 +1,14 @@
-<ion-content>
+<ion-header>
+  <ion-row>
+    <ion-col text-center width-100><span>Tulokset</span></ion-col>
+  </ion-row>
+</ion-header>
 
-  <ion-toolbar class="menu-bar" position="top">
-    <ion-row class="stroke-input">
-      <ion-col class="text-center" width-100><span>Tulokset</span></ion-col>
-    </ion-row>
-  </ion-toolbar>
+<ion-content>
 
     <ion-card>
       <ion-card-content>
         <ion-card-title><span></span></ion-card-title>
-
-        <ion-card-title text-center> <span light>Tulos</span> </ion-card-title>
 
           <section class="border-bottom">
 
@@ -36,7 +34,7 @@
   </ion-card>
 
   <ion-buttons text-center>
-    <button outline primary>Tuloskortti</button>
+    <button (click)="showScoreCard()" outline primary>Tuloskortti</button>
   </ion-buttons>
 
   <ion-card>
@@ -61,3 +59,9 @@
 </ion-card>
 
 </ion-content>
+
+<ion-footer text-center>
+  <ion-row>
+    <ion-col> <button>Lopeta kierros</button></ion-col>
+  </ion-row>
+</ion-footer>

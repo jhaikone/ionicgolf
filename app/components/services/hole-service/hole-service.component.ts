@@ -1,5 +1,7 @@
 import  { Injectable, EventEmitter } from '@angular/core';
 
+import * as _ from 'lodash';
+
 let players = [
   {
     id: 33442,
@@ -41,6 +43,7 @@ const COURSES = [
       {name:"b", metre: 2276},
       {name:"c", metre: 1995}
     ],
+    par: 36,
     holes: [
       {
         hole: 1,
@@ -116,6 +119,87 @@ const COURSES = [
       },
       {
         hole: 9,
+        par: 4,
+        distances: {
+          a: 345,
+          b: 300,
+          c: 267
+        }
+      },
+      {
+        hole: 10,
+        par: 4,
+        distances: {
+          a: 284,
+          b: 229,
+          c: 194
+        }
+      },
+      {
+        hole: 11,
+        par: 3,
+        distances: {
+          a: 154,
+          b: 131,
+          c: 119
+        }
+      },
+      {
+        hole: 12,
+        par: 5,
+        distances: {
+          a: 477,
+          b: 381,
+          c: 332
+        }
+      },
+      {
+        hole: 13,
+        par: 5,
+        distances: {
+          a: 447,
+          b: 384,
+          c: 311
+        }
+      },
+      {
+        hole: 14,
+        par: 3,
+        distances: {
+          a: 110,
+          b: 102,
+          c: 78
+        }
+      },
+      {
+        hole: 15,
+        par: 5,
+        distances: {
+          a: 448,
+          b: 362,
+          c: 362
+        }
+      },
+      {
+        hole: 16,
+        par: 4,
+        distances: {
+          a: 339,
+          b: 282,
+          c: 237
+        }
+      },
+      {
+        hole: 17,
+        par: 3,
+        distances: {
+          a: 141,
+          b: 105,
+          c: 95
+        }
+      },
+      {
+        hole: 18,
         par: 4,
         distances: {
           a: 345,
@@ -222,17 +306,19 @@ export class HoleService {
 
   private index: number;
   private model: any = {holes: []};
-  private holes: any;
+  private holes: Array<any> = [];
 
   constructor() {
     this.index = 0;
     this.holes = COURSES[0].holes;
 
     this.holes.map((mock, index) => {
-
+    let random = Math.floor(Math.random() * 6) + 2;
+    console.log('randomn', random);
+      // strokes: {value:this.holes[index].par, key: 'strokes'},
       let object = { singlePlayer:
         {
-          strokes: {value:this.holes[index].par, key: 'strokes'},
+          strokes: {value:random, key: 'strokes'},
           putts: {value: 2, key: 'putts'},
           sands: {value: 0, key: 'sands'},
           penalties: {value: 0, key: 'penalties'},
@@ -259,6 +345,27 @@ export class HoleService {
     });
   }
 
+  private getParTotal(index, end) {
+    let total = 0;
+    for (index; index < end; index++) {
+      total = total + this.holes[index].par;
+    }
+    return total;
+  }
+
+  getFrontNinePar() {
+    return this.getParTotal(0, 9);
+  }
+
+  getBackNinePar() {
+    return this.getParTotal(9, 17);
+  }
+
+  getHolesBetween(start, end) {
+    let copy = _.map(this.holes, _.clone);
+    return copy.splice(start, end);
+  }
+
   getIndex() {
     return this.index;
   }
@@ -272,8 +379,7 @@ export class HoleService {
   }
 
   getResultAt(index) {
-    if(index === -1) return {};
-    console.log('onmde', index);
+    if(index === -1 || index > this.model.holes.length-1) return {};
     return this.model.holes[index].singlePlayer;
   }
 
@@ -373,15 +479,18 @@ export class HoleService {
       case -4: {
         statistics.holeInOne.amount = statistics.holeInOne.amount+1;
         statistics.holeInOne.holes.push(holeIndex);
+        hole.singlePlayer.resultName = 'hole-in-one';
         break;
       }
       case -3: {
         if (par === 4) {
           statistics.holeInOne.amount = statistics.holeInOne.amount+1;
           statistics.holeInOne.holes.push(holeIndex);
+          hole.singlePlayer.resultName = 'hole-in-one';
         } else {
           statistics.albatross.amount = statistics.albatross.amount+1;
           statistics.albatross.holes.push(holeIndex);
+          hole.singlePlayer.resultName = 'albatross';
         }
         break;
       }
@@ -389,40 +498,48 @@ export class HoleService {
         if (par === 3) {
           statistics.holeInOne.amount = statistics.holeInOne.amount+1;
           statistics.holeInOne.holes.push(holeIndex);
+          hole.singlePlayer.resultName = 'hole-in-one';
         } else {
           statistics.eagle.amount = statistics.eagle.amount+1;
           statistics.eagle.holes.push(holeIndex);
+          hole.singlePlayer.resultName = 'eagle';
         }
         break;
       }
       case -1: {
         statistics.birdie.amount = statistics.birdie.amount+1;
         statistics.birdie.holes.push(holeIndex);
+        hole.singlePlayer.resultName = 'birdie';
         break;
       }
       case 0: {
         statistics.par.amount = statistics.par.amount+1;
         statistics.par.holes.push(holeIndex);
+        hole.singlePlayer.resultName = 'par';
         break;
       }
       case 1: {
         statistics.bogey.amount = statistics.bogey.amount+1;
         statistics.bogey.holes.push(holeIndex);
+        hole.singlePlayer.resultName = 'bogey';
         break;
       }
       case 2: {
         statistics.doubleBogey.amount = statistics.doubleBogey.amount+1;
         statistics.doubleBogey.holes.push(holeIndex);
+        hole.singlePlayer.resultName = 'double-bogey';
         break;
       }
       case 3: {
         statistics.tripleBogey.amount = statistics.tripleBogey.amount+1;
         statistics.tripleBogey.holes.push(holeIndex);
+        hole.singlePlayer.resultName = 'triple-bogey';
         break;
       }
       default: {
         statistics.rest.amount = statistics.rest.amount+1;
         statistics.rest.holes.push(holeIndex);
+        hole.singlePlayer.resultName = 'quadro-bogey';
       }
     }
   }

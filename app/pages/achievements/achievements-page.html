@@ -1,9 +1,9 @@
-<ion-toolbar class="trophy-bar">
-  <ion-row border-bottom>
-    <ion-col width-50><div><h2 primary class="bar-height">Saavutukset!</h2></div></ion-col>
-    <ion-col width-50 text-right><a (click)="close()"><ion-icon class="font-big bar-height" name="close"></ion-icon></a></ion-col>
+<ion-header>
+  <ion-row>
+    <ion-col width-50><span primary>Saavutukset!</span></ion-col>
+    <ion-col width-50 text-right><a (click)="close()"><ion-icon name="close"></ion-icon></a></ion-col>
   </ion-row>
-</ion-toolbar>
+</ion-header>
 
 <ion-content class="margin-top relative">
 
@@ -62,7 +62,7 @@
 
 </ion-content>
 
-<ion-toolbar class="golf-bottom-bar" position="bottom" extra-light>
+<ion-footer extra-light>
   <ion-row text-center>
 
     <ion-col width-33>
@@ -87,4 +87,4 @@
     </ion-col>
 
   </ion-row>
-</ion-toolbar>
+</ion-footer>
